@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "INWTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window =  [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    INWTableViewController* inwTable = [[INWTableViewController alloc]init];
+    self.window.rootViewController =  inwTable;
+    self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }
 
