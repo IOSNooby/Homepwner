@@ -21,7 +21,11 @@
     
     self.window =  [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     INWTableViewController* inwTable = [[INWTableViewController alloc]init];
-    self.window.rootViewController =  inwTable;
+    
+    UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:inwTable];
+    
+    
+    self.window.rootViewController =  navController;
     self.window.backgroundColor = [UIColor whiteColor];
     return YES;
 }

@@ -15,6 +15,10 @@
 		2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1BF1A3757D80011785B /* INWTableViewController.m */; };
 		2386A1C31A3777440011785B /* INWitem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1C21A3777440011785B /* INWitem.m */; };
 		2386A1C61A383BF80011785B /* INWItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1C51A383BF80011785B /* INWItemStore.m */; };
+		2386A1CB1A3A58B70011785B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1CA1A3A58B70011785B /* ViewController.m */; };
+		2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1CC1A3AF5300011785B /* HeaderView.xib */; };
+		2386A1D01A4080830011785B /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1CF1A4080830011785B /* SecondVC.m */; };
+		2386A1D21A408C100011785B /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1D11A408C100011785B /* SecondView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,12 @@
 		2386A1C21A3777440011785B /* INWitem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWitem.m; sourceTree = "<group>"; };
 		2386A1C41A383BF80011785B /* INWItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWItemStore.h; sourceTree = "<group>"; };
 		2386A1C51A383BF80011785B /* INWItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWItemStore.m; sourceTree = "<group>"; };
+		2386A1C91A3A58B70011785B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2386A1CA1A3A58B70011785B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2386A1CC1A3AF5300011785B /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		2386A1CE1A4080830011785B /* SecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondVC.h; sourceTree = "<group>"; };
+		2386A1CF1A4080830011785B /* SecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondVC.m; sourceTree = "<group>"; };
+		2386A1D11A408C100011785B /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +100,8 @@
 				2386A1C71A3A40B10011785B /* Model */,
 				2386A1C81A3A40D20011785B /* Controller */,
 				2386A1A51A3724000011785B /* Images.xcassets */,
+				2386A1D11A408C100011785B /* SecondView.xib */,
+				2386A1CC1A3AF5300011785B /* HeaderView.xib */,
 				2386A1A71A3724000011785B /* LaunchScreen.xib */,
 				2386A1981A3724000011785B /* Supporting Files */,
 			);
@@ -99,6 +111,8 @@
 		2386A1981A3724000011785B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2386A1C91A3A58B70011785B /* ViewController.h */,
+				2386A1CA1A3A58B70011785B /* ViewController.m */,
 				2386A1991A3724000011785B /* Info.plist */,
 				2386A19A1A3724000011785B /* main.m */,
 			);
@@ -138,6 +152,8 @@
 			children = (
 				2386A1BE1A3757D80011785B /* INWTableViewController.h */,
 				2386A1BF1A3757D80011785B /* INWTableViewController.m */,
+				2386A1CE1A4080830011785B /* SecondVC.h */,
+				2386A1CF1A4080830011785B /* SecondVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -222,7 +238,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */,
 				2386A1A91A3724000011785B /* LaunchScreen.xib in Resources */,
+				2386A1D21A408C100011785B /* SecondView.xib in Resources */,
 				2386A1A61A3724000011785B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,9 +259,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2386A1CB1A3A58B70011785B /* ViewController.m in Sources */,
 				2386A1C31A3777440011785B /* INWitem.m in Sources */,
 				2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */,
 				2386A1C61A383BF80011785B /* INWItemStore.m in Sources */,
+				2386A1D01A4080830011785B /* SecondVC.m in Sources */,
 				2386A19E1A3724000011785B /* AppDelegate.m in Sources */,
 				2386A19B1A3724000011785B /* main.m in Sources */,
 			);

@@ -9,6 +9,8 @@
 #import "INWItemStore.h"
 #import "INWitem.h"
 
+static INWItemStore* store = nil;
+
 @interface INWItemStore()
 
 @property (strong ,nonatomic) NSMutableArray* privateItems;
@@ -18,8 +20,36 @@
 
 @implementation INWItemStore
 
+#pragma mark Class Methods
 
-#pragma mark 
+
++(instancetype) sharedStore{
+    if(!store){
+        store = [[self alloc]initWithPrivate];
+    }
+    return store;
+}
+
+
+#pragma mark Class Initializers
+
+/// both init methods cant speak to the client.
+/// you init only through sharedStore "Once".
+
+-(instancetype) initWithPrivate{
+    return [super init];
+}
+
+
+-(instancetype) init{
+    @throw  [NSException exceptionWithName:@"Singleton"
+                                    reason:@"You Noob !!,go USE +[INWItemstore sharedStore] method instead !!"
+                                  userInfo:nil];
+    return nil;
+}
+
+
+#pragma mark Lazy inits
 
 -(NSMutableArray*) privateItems{
     if(!_privateItems){
@@ -28,38 +58,36 @@
     return _privateItems;
 }
 
-// singleton paradigm
 
-+(instancetype) sharedStore{
-    static INWItemStore* store = nil;
-    if(!store){
-        store = [[self alloc]initwithPrivate];
-    }
-    return store;
-}
-
--(instancetype) initwithPrivate{
-    return [super init];
-}
-
-/// if user call init , warn him to use others method
-
--(instancetype) init{
-    @throw  [NSException exceptionWithName:@"Singleton"
-                   reason:@"You Noob !!,go USE +[INWItemstore sharedStore] method instead !!"
-                   userInfo:nil];
-    return nil;
-}
-
-///
+#pragma mark Methods 
 
 -(INWitem*) createINWItem {
+
     INWitem * item = [INWitem randomItem];
     // everytime item created , store it to Array ! (store pointer)
+    NSLog(@"random Item ? = %@",item);
+
     [self.privateItems addObject: item];
     return item;
    
 }
+
+-(void) moveItemFromIndex:(NSInteger)from
+                  toIndex:(NSInteger)destination{
+    
+    INWitem* originalPosition = self.privateItems[from];
+    
+    [self.privateItems removeObjectIdenticalTo:originalPosition];
+    [self.privateItems insertObject:originalPosition atIndex:destination];
+    
+}
+
+-(void) removeItem:(INWitem *)itemToRemove{
+    // removing base on memory Address in Heap
+    
+    [self.privateItems removeObjectIdenticalTo:itemToRemove];
+}
+
 
 -(NSMutableArray*) allItems{
     return [self.privateItems copy];

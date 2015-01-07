@@ -38,6 +38,9 @@
     NSArray* arrayName = self.nameList;
     item.itemName = arrayName [ arc4random() % [arrayName count]];
     
+    NSDate * currentDate = [NSDate date];
+    item.dateCreated = currentDate;
+    
     return item ;
 }
 

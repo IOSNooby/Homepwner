@@ -13,6 +13,13 @@
 @interface INWItemStore : NSObject
 
 +(instancetype) sharedStore;
+
 -(INWitem*) createINWItem;
+
+-(void) removeItem:(INWitem*)itemToRemove;
+
 -(NSMutableArray*) allItems;
+
+-(void) moveItemFromIndex:(NSInteger) from
+                  toIndex: (NSInteger) destination;
 @end
