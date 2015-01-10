@@ -10,7 +10,7 @@
 #import "INWItemStore.h"
 #import "INWitem.h"
 #import "SecondVC.h"
-
+#import "newCellTableViewCell.h"
 
 
 @interface INWTableViewController ()
@@ -19,9 +19,13 @@
 
 @property (nonatomic,strong) IBOutlet UIView* headerView;
 
+@property (strong, nonatomic) IBOutlet newCellTableViewCell *myCell;
+
 @end
 
 @implementation INWTableViewController
+
+@synthesize myCell = _myCell;
 
 #pragma mark View Settings
 
@@ -30,39 +34,44 @@
     [self.tableView reloadData];
 }
 
-#pragma mark IBActions
+/*
 
+-(newCellTableViewCell*) myCell{
+    
+    if(!_myCell){
+        
+        NSLog(@"loadNib in myNewCell's getter ");
+
+        [[NSBundle mainBundle]loadNibNamed:@"newCell"
+                                     owner:self options:nil];
+    }
+    return _myCell;
+}
+*/
+
+// this method loading the NIB (Graphics Information)
 -(UIView*) headerView{
-
+    
     if(!_headerView){
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
+        [[NSBundle mainBundle] loadNibNamed:@"newCell"
                                       owner:self options:nil];
     }
     return _headerView;
 }
 
+#pragma mark IBActions
+
+
 
 -(IBAction)addNewItem:(id)sender
 {
-    /// Reason why buggy : self.tableView max Index = 9 , but you InsertRow at 10.
-    
-    INWitem* new = [[INWItemStore sharedStore] createINWItem];
-    // the moment you createdINWItem , store size +1
-    NSInteger lastRow = [[[INWItemStore sharedStore]allItems] indexOfObject:new];
-    // got the lastRow Index (9+1)
-    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    // generate indexPath , compatable for TableView system (0 - 10)
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationTop];
-    
-    // At last , Insert ROW at [10] position
+    [self addNewItem_Helper];
 }
 
 -(IBAction)toggleEditingMode:(id)sender
 {
     // if current state = Editable Mode
     // flip it to = UnEditable Mode
-    NSLog(@"YO = %hhd",self.isEditing);
 
     if(self.isEditing){
         [sender setTitle:@"Edit" forState:UIControlStateNormal];
@@ -77,32 +86,47 @@
 #pragma mark Class Initializers
 
 // this is Designate initializer
--(instancetype) init{
-    return [super initWithStyle:UITableViewStylePlain];
-}
 
 -(instancetype) initWithStyle:(UITableViewStyle)style{
     return [self init];
 }
+
+-(instancetype) init{
+    return [super initWithStyle:UITableViewStylePlain];
+}
+
+
 //  Force every init method to return just 1 type (StylePlain)
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     /// this code Define Cell's soul (Prepare Cell's class) and add Identifier.
-    /// You can modify the CELL by coding
+    /// You can modify the CELL to CustomCellClass by coding
     
     
+    /*
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+    */
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    /*[self.tableView registerClass:[newCellTableViewCell class]
+                        forCellReuseIdentifier:@"newCellX"];
+    */
+    UINib* thenib = [UINib nibWithNibName:@"newCell" bundle:nil];
+    [self.tableView registerNib:thenib forCellReuseIdentifier:@"newCell"];
+    [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                              target:self action:@selector(addNewItem_Helper)];
     
     [self.tableView setTableHeaderView:self.headerView];
+    
 }
 
 #pragma mark Lazy inits
@@ -137,16 +161,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    /*
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
-                                                            forIndexPath:indexPath];
+                                                            forIndexPath:indexPath]; */
+    
+    /// make test CustomCell using Xib
+    
+    //[[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+
+  /*  newCellTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"newCell"
+                                                           forIndexPath:indexPath];
+    */
+    
+    NSArray* n = [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+    
+    newCellTableViewCell* cell  = [n firstObject];
+    
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
-        cell.textLabel.text = item.itemName;
+        cell.myLabel.text = item.itemName;
+       // cell.textLabel.text = item.itemName;
     }
     else if(indexPath.row == [[[INWItemStore sharedStore] allItems]count]){
         // name the last View cell appearance
-        cell.textLabel.text = @"...";
+        cell.myLabel.text = @"...";
     }
+    
+    NSLog(@"What the HELL IS CELL NOW ? = %@",cell);
+
     
     return cell;
     
@@ -191,7 +233,6 @@
                     moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                            toIndexPath:(NSIndexPath *)destinationIndexPath{
     
-    
       [[INWItemStore sharedStore] moveItemFromIndex:sourceIndexPath.row
                                           toIndex:destinationIndexPath.row];
 }
@@ -206,9 +247,10 @@
 }
 
 
+#pragma mark Navigation to Another VC
+
 -(void)tableView:(UITableView *)tableView
                   didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     if(indexPath.row != [[[INWItemStore sharedStore]allItems]count]){
     
@@ -219,6 +261,7 @@
         SecondVC* detailVC = [[SecondVC alloc]init];
         detailVC.item = a;
         [self.navigationController pushViewController:detailVC animated:YES];
+        
     }
 }
 
@@ -237,7 +280,23 @@
 }
 */
 
+#pragma mark Helpers Methods
 
+// This method run inside both Navigation's SystemButton "Add" and also Xib custom Header "add" button
+
+-(void) addNewItem_Helper{
+    // Reason why buggy : self.tableView max Index = 9 , but you InsertRow at 10.
+    INWitem* new = [[INWItemStore sharedStore] createINWItem];
+    // the moment you createdINWItem , store size +1
+    NSInteger lastRow = [[[INWItemStore sharedStore]allItems] indexOfObject:new];
+    // got the lastRow Index (9+1)
+    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    // generate indexPath , compatable for TableView system (0 - 10)
+    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];
+    
+    // At last , Insert ROW at [10] position
+}
 
 
 

@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "INWTableViewController.h"
+//#import "INWTableViewController.h"
+
+#import "StartViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +22,13 @@
     // Override point for customization after application launch.
     
     self.window =  [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    INWTableViewController* inwTable = [[INWTableViewController alloc]init];
+    [self.window makeKeyAndVisible];
+    //INWTableViewController* inwTable = [[INWTableViewController alloc]init];
     
-    UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:inwTable];
+    StartViewController* startVC = [[StartViewController alloc]init];
     
+    
+    UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:startVC];
     
     self.window.rootViewController =  navController;
     self.window.backgroundColor = [UIColor whiteColor];
