@@ -19,13 +19,14 @@
 
 @property (nonatomic,strong) IBOutlet UIView* headerView;
 
-@property (strong, nonatomic) IBOutlet newCellTableViewCell *myCell;
+
+@property (strong, nonatomic) IBOutlet newCellTableViewCell *CellX;
 
 @end
 
 @implementation INWTableViewController
 
-@synthesize myCell = _myCell;
+@synthesize CellX = _CellX;
 
 #pragma mark View Settings
 
@@ -34,16 +35,15 @@
     [self.tableView reloadData];
 }
 
-/*
 
+/*
 -(newCellTableViewCell*) myCell{
     
     if(!_myCell){
         
         NSLog(@"loadNib in myNewCell's getter ");
-
-        [[NSBundle mainBundle]loadNibNamed:@"newCell"
-                                     owner:self options:nil];
+       _myCell = [[newCellTableViewCell alloc]]
+     
     }
     return _myCell;
 }
@@ -53,7 +53,7 @@
 -(UIView*) headerView{
     
     if(!_headerView){
-        [[NSBundle mainBundle] loadNibNamed:@"newCell"
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
                                       owner:self options:nil];
     }
     return _headerView;
@@ -89,7 +89,7 @@
 
 -(instancetype) initWithStyle:(UITableViewStyle)style{
     return [self init];
-}
+    }
 
 -(instancetype) init{
     return [super initWithStyle:UITableViewStylePlain];
@@ -111,12 +111,12 @@
            forCellReuseIdentifier:@"UITableViewCell"];
     */
     
-    /*[self.tableView registerClass:[newCellTableViewCell class]
-                        forCellReuseIdentifier:@"newCellX"];
-    */
-    UINib* thenib = [UINib nibWithNibName:@"newCell" bundle:nil];
-    [self.tableView registerNib:thenib forCellReuseIdentifier:@"newCell"];
-    [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+    UINib* thenib = [UINib nibWithNibName:@"neoCell" bundle:nil]; // aka mainbundle
+    [self.tableView registerNib:thenib  forCellReuseIdentifier:@"neoCell" ];
+    
+   // UINib* thenib = [UINib nibWithNibName:@"newCell" bundle:nil]; // aka mainbundle
+    //[self.tableView registerNib:thenib forCellReuseIdentifier:@"newCell"];
+   //[[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
     
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -161,21 +161,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /*
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
-                                                            forIndexPath:indexPath]; */
     
     /// make test CustomCell using Xib
     
-    //[[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+   // [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
 
-  /*  newCellTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"newCell"
-                                                           forIndexPath:indexPath];
+     newCellTableViewCell * cell = [tableView
+            dequeueReusableCellWithIdentifier:@"neoCell"
+                                 forIndexPath:indexPath];
+    // ---* this Code Work !!!*-----
+    
+    /*NSArray* n = [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+
+    newCellTableViewCell* cell  = [n firstObject];
     */
     
-    NSArray* n = [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
-    
-    newCellTableViewCell* cell  = [n firstObject];
     
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];

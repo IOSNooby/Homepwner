@@ -10,7 +10,7 @@
 
 @interface newCellTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *ContentView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UISwitch *onOff;
 

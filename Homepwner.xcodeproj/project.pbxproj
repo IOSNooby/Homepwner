@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		236BED0F1A61DDC2007020C7 /* neoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 236BED0E1A61DDC2007020C7 /* neoCell.xib */; };
+		236BED121A61DE2D007020C7 /* neoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 236BED111A61DE2D007020C7 /* neoCell.m */; };
 		2372AC021A5DD9E1002C06F7 /* StartScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2372AC011A5DD9E1002C06F7 /* StartScreen.xib */; };
 		2372AC051A5DDB97002C06F7 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2372AC041A5DDB97002C06F7 /* StartViewController.m */; };
 		2372AC071A60B918002C06F7 /* newCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2372AC061A60B918002C06F7 /* newCell.xib */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		236BED0E1A61DDC2007020C7 /* neoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = neoCell.xib; sourceTree = "<group>"; };
+		236BED101A61DE2D007020C7 /* neoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = neoCell.h; sourceTree = "<group>"; };
+		236BED111A61DE2D007020C7 /* neoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = neoCell.m; sourceTree = "<group>"; };
 		2372AC011A5DD9E1002C06F7 /* StartScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartScreen.xib; sourceTree = "<group>"; };
 		2372AC031A5DDB97002C06F7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		2372AC041A5DDB97002C06F7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		2372AC081A60B927002C06F7 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				236BED0E1A61DDC2007020C7 /* neoCell.xib */,
 				2372AC061A60B918002C06F7 /* newCell.xib */,
 				2372AC011A5DD9E1002C06F7 /* StartScreen.xib */,
 				2386A1D11A408C100011785B /* SecondView.xib */,
@@ -99,6 +105,8 @@
 		2372AC0C1A60BF44002C06F7 /* Xib Classes */ = {
 			isa = PBXGroup;
 			children = (
+				236BED101A61DE2D007020C7 /* neoCell.h */,
+				236BED111A61DE2D007020C7 /* neoCell.m */,
 				2372AC091A60BF2C002C06F7 /* newCellTableViewCell.h */,
 				2372AC0A1A60BF2C002C06F7 /* newCellTableViewCell.m */,
 			);
@@ -273,6 +281,7 @@
 				2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */,
 				2386A1A91A3724000011785B /* LaunchScreen.xib in Resources */,
 				2386A1D21A408C100011785B /* SecondView.xib in Resources */,
+				236BED0F1A61DDC2007020C7 /* neoCell.xib in Resources */,
 				2386A1A61A3724000011785B /* Images.xcassets in Resources */,
 				2372AC071A60B918002C06F7 /* newCell.xib in Resources */,
 				2372AC021A5DD9E1002C06F7 /* StartScreen.xib in Resources */,
@@ -295,6 +304,7 @@
 			files = (
 				2386A1CB1A3A58B70011785B /* ViewController.m in Sources */,
 				2386A1C31A3777440011785B /* INWitem.m in Sources */,
+				236BED121A61DE2D007020C7 /* neoCell.m in Sources */,
 				2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */,
 				2386A1C61A383BF80011785B /* INWItemStore.m in Sources */,
 				2372AC0B1A60BF2C002C06F7 /* newCellTableViewCell.m in Sources */,

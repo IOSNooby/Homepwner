@@ -13,13 +13,14 @@
 - (void)awakeFromNib {
     
     NSLog(@"newCell told Iam Awake from NIB ");
+    //[self.ContentView addSubview:self.myLabel];
+ //   [self.ContentView addSubview:self.onOff];
     
-    
-
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+    //[super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
