@@ -22,4 +22,7 @@
 
 -(void) moveItemFromIndex:(NSInteger) from
                   toIndex: (NSInteger) destination;
+
+-(NSInteger) lastObjectIndex;
+
 @end

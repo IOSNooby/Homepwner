@@ -10,6 +10,7 @@
 
 @implementation neoCell
 
+
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -20,4 +21,14 @@
     // Configure the view for the selected state
 }
 
+-(UILabel*) textLabel{
+    return nil;
+}
+
+-(UILabel*) detailTextLabel{
+    return nil;
+}
+-(UIImageView*) imageView{
+    return nil;
+}
 @end

@@ -92,4 +92,8 @@ static INWItemStore* store = nil;
 -(NSMutableArray*) allItems{
     return [self.privateItems copy];
 }
+
+-(NSInteger) lastObjectIndex{
+    return   [self.privateItems count]-1;
+}
 @end

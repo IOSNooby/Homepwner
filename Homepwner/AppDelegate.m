@@ -27,7 +27,6 @@
     
     StartViewController* startVC = [[StartViewController alloc]init];
     
-    
     UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:startVC];
     
     self.window.rootViewController =  navController;

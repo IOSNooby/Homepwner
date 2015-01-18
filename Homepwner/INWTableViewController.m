@@ -10,8 +10,7 @@
 #import "INWItemStore.h"
 #import "INWitem.h"
 #import "SecondVC.h"
-#import "newCellTableViewCell.h"
-
+#import "neoCell.h"
 
 @interface INWTableViewController ()
 
@@ -20,13 +19,10 @@
 @property (nonatomic,strong) IBOutlet UIView* headerView;
 
 
-@property (strong, nonatomic) IBOutlet newCellTableViewCell *CellX;
-
 @end
 
 @implementation INWTableViewController
 
-@synthesize CellX = _CellX;
 
 #pragma mark View Settings
 
@@ -36,18 +32,6 @@
 }
 
 
-/*
--(newCellTableViewCell*) myCell{
-    
-    if(!_myCell){
-        
-        NSLog(@"loadNib in myNewCell's getter ");
-       _myCell = [[newCellTableViewCell alloc]]
-     
-    }
-    return _myCell;
-}
-*/
 
 // this method loading the NIB (Graphics Information)
 -(UIView*) headerView{
@@ -105,20 +89,17 @@
     /// this code Define Cell's soul (Prepare Cell's class) and add Identifier.
     /// You can modify the CELL to CustomCellClass by coding
     
-    
+    // common TableViewCell
     /*
     [self.tableView registerClass:[UITableViewCell class]
-           forCellReuseIdentifier:@"UITableViewCell"];
+           forCellReuseIdentifier: @"UITableViewCell"];
     */
     
     UINib* thenib = [UINib nibWithNibName:@"neoCell" bundle:nil]; // aka mainbundle
-    [self.tableView registerNib:thenib  forCellReuseIdentifier:@"neoCell" ];
     
-   // UINib* thenib = [UINib nibWithNibName:@"newCell" bundle:nil]; // aka mainbundle
-    //[self.tableView registerNib:thenib forCellReuseIdentifier:@"newCell"];
-   //[[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
+    [self.tableView registerNib:thenib  forCellReuseIdentifier:@"neoCellX" ];
     
-    
+   
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
@@ -166,8 +147,8 @@
     
    // [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
 
-     newCellTableViewCell * cell = [tableView
-            dequeueReusableCellWithIdentifier:@"neoCell"
+     neoCell * cell = [tableView
+            dequeueReusableCellWithIdentifier:@"neoCellX"
                                  forIndexPath:indexPath];
     // ---* this Code Work !!!*-----
     
@@ -176,11 +157,10 @@
     newCellTableViewCell* cell  = [n firstObject];
     */
     
-    
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
         cell.myLabel.text = item.itemName;
-       // cell.textLabel.text = item.itemName;
+        cell.textLabel.text = item.itemName;
     }
     else if(indexPath.row == [[[INWItemStore sharedStore] allItems]count]){
         // name the last View cell appearance
@@ -203,7 +183,7 @@
              commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
               forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(indexPath.row < [[[INWItemStore sharedStore]allItems] count]){
+   // if(indexPath.row < [[[INWItemStore sharedStore]allItems] count]){
         
         if(editingStyle == UITableViewCellEditingStyleDelete){
         
@@ -212,7 +192,25 @@
             [tableView deleteRowsAtIndexPaths:@[indexPath]
                              withRowAnimation:UITableViewRowAnimationFade];
       }
+        else if(editingStyle == UITableViewCellEditingStyleInsert){
+            [self addNewItem_Helper];
+        }
+  //  }
+}
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // if indexpath.row == lastIndex in Model's Array  (mean  you got those "very last cell"
+    //  grant its cell style to "insertStyle"
+    
+    INWItemStore* store = [INWItemStore sharedStore];
+    
+    if(indexPath.row ==[store lastObjectIndex]+1){
+        return    UITableViewCellEditingStyleInsert;
     }
+    else{
+        return UITableViewCellEditingStyleDelete;
+    }
+        return  UITableViewCellEditingStyleNone;
 }
 
 -(NSString*) tableView:(UITableView *)tableView
@@ -247,7 +245,7 @@
 }
 
 
-#pragma mark Navigation to Another VC
+#pragma mark Navigation to Another VC  
 
 -(void)tableView:(UITableView *)tableView
                   didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
