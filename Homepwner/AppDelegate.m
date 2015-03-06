@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 //#import "INWTableViewController.h"
-
 #import "StartViewController.h"
+#import "INWItemStore.h"
+#import "ImageStore.h"
 
 @interface AppDelegate ()
 
@@ -26,9 +27,9 @@
     //INWTableViewController* inwTable = [[INWTableViewController alloc]init];
     
     StartViewController* startVC = [[StartViewController alloc]init];
-    
+  
+
     UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:startVC];
-    
     self.window.rootViewController =  navController;
     self.window.backgroundColor = [UIColor whiteColor];
     return YES;
@@ -40,8 +41,25 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+   
+      BOOL saved =  [[INWItemStore sharedStore] savingStore];
+    if(saved){
+        NSLog(@"Save complete ! ");
+    }
+    else{
+        NSLog(@"Save Failed ");
+
+    }
+    BOOL savedimg = [[ImageStore singletonImageStore]saveStore];
+    
+    if(savedimg){
+        NSLog(@"Save img complete ! ");
+    }
+    else{
+        NSLog(@"Save img Failed ");
+        
+    }
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

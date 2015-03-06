@@ -12,5 +12,11 @@
 @interface SecondVC : UIViewController
 
 @property(strong,nonatomic) INWitem* item;
+@property(nonatomic,copy) void (^refreshTVBlock)(void);
+
+
+-(instancetype) initWithNewItem:(BOOL)isNew;
+
+
 
 @end

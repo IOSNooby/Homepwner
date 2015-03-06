@@ -8,6 +8,7 @@
 
 #import "INWItemStore.h"
 #import "INWitem.h"
+#import "ImageStore.h" 
 
 static INWItemStore* store = nil;
 
@@ -24,11 +25,18 @@ static INWItemStore* store = nil;
 
 
 +(instancetype) sharedStore{
+    
     if(!store){
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
         store = [[self alloc]initWithPrivate];
+    });
     }
+
     return store;
 }
+
+
 
 
 #pragma mark Class Initializers
@@ -37,7 +45,15 @@ static INWItemStore* store = nil;
 /// you init only through sharedStore "Once".
 
 -(instancetype) initWithPrivate{
-    return [super init];
+    self = [super init];
+    if(self){
+        BOOL success = [self loadingSavedStore];
+        if(success){
+            NSLog(@"load succeeded");
+        }
+    }
+    
+    return self;
 }
 
 
@@ -47,6 +63,7 @@ static INWItemStore* store = nil;
                                   userInfo:nil];
     return nil;
 }
+
 
 
 #pragma mark Lazy inits
@@ -63,10 +80,8 @@ static INWItemStore* store = nil;
 
 -(INWitem*) createINWItem {
 
-    INWitem * item = [INWitem randomItem];
+    INWitem * item = [INWitem createBlankItem];
     // everytime item created , store it to Array ! (store pointer)
-    NSLog(@"random Item ? = %@",item);
-
     [self.privateItems addObject: item];
     return item;
    
@@ -86,6 +101,7 @@ static INWItemStore* store = nil;
     // removing base on memory Address in Heap
     
     [self.privateItems removeObjectIdenticalTo:itemToRemove];
+    [[ImageStore singletonImageStore] deleteImageByKey:itemToRemove.myUUID];
 }
 
 
@@ -96,4 +112,36 @@ static INWItemStore* store = nil;
 -(NSInteger) lastObjectIndex{
     return   [self.privateItems count]-1;
 }
+
+#pragma mark Persistent Methods 
+
+-(NSURL*) defaultsavePath{
+    
+    NSFileManager* manager = [[NSFileManager alloc]init];
+    
+    NSURL* original = [manager URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+    
+    NSURL* destinationNEW  = [original URLByAppendingPathComponent:@"itemStore"];
+    return destinationNEW;
+}
+
+-(BOOL) savingStore{
+    
+    NSData* finalDataToSave = [NSKeyedArchiver archivedDataWithRootObject:self.privateItems];
+    return [finalDataToSave writeToURL:[self defaultsavePath]atomically:YES];
+}
+
+-(BOOL) loadingSavedStore{
+    
+    NSData * data =[[NSData alloc]initWithContentsOfURL:[self defaultsavePath]];
+    if(data){
+        id someFile = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if([someFile isKindOfClass:[NSMutableArray class]]){
+            self.privateItems = someFile;
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

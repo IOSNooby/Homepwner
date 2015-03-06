@@ -13,24 +13,79 @@
 @property (strong,nonatomic) NSArray* nameList;
 @property (strong,nonatomic) NSArray* serialNumList;
 
+@property (strong,nonatomic) NSString* myUUID;
+
 @end
 
 @implementation INWitem
 
+
+-(INWitem*) init{
+    self = [super init];
+    if(self){
+        [self autoCreateUUIDForThisItem];
+    }
+    return  self;
+}
+
+
+-(instancetype) initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if(self){
+        _itemName = [aDecoder decodeObjectForKey:@"itemName"];
+        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _valueInDollars = [aDecoder decodeObjectForKey:@"valueInDollars"];
+        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _myUUID = [aDecoder decodeObjectForKey:@"myUUID"];
+    }
+    return self;
+}
+
+
+
 +(NSArray*) nameList{
     return   @[@"John",@"Sven",@"Mirana",@"Butcher",@"Lois"
                ,@"Ommy",@"Cammy",@"Sagat",@"Juri"];;
-}
+}  
 
 +(NSArray*) serialNumList{
     return @[@"111",@"222",@"333",@"444",@"555",@"666",@"777",@"888"];
 }
 
+
++(INWitem*) createBlankItem{
+    INWitem* item = [[INWitem alloc]init];
+    return item;
+}
+
+-(void) autoCreateUUIDForThisItem{
+    NSUUID* myID = [NSUUID UUID];
+    NSString* gotID = [myID UUIDString];
+    self.myUUID = gotID;
+}
+
+
+#pragma mark NSCoding Protocol
+
+-(void) encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:self.itemName forKey:@"itemName"];
+    [aCoder encodeObject:self.serialNumber forKey:@"serialNumber"];
+    [aCoder encodeObject:self.valueInDollars forKey:@"valueInDollars"];
+    [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
+    [aCoder encodeObject:self.myUUID forKey:@"myUUID"];
+    
+}
+
+
+
+#pragma mark Unused (Oldversion)
+
 +(INWitem*) randomItem{
     
     INWitem * item = [[INWitem alloc]init];
     // random Value
-    item.valueInDollars=  arc4random() % 20;
+    item.valueInDollars = [NSNumber numberWithInteger: (arc4random() % 100000) +1];
     // random Serial
     NSArray* arraySerial = self.serialNumList;
     item.serialNumber = arraySerial[ arc4random() % [arraySerial count]];
@@ -43,6 +98,4 @@
     
     return item ;
 }
-
-
 @end

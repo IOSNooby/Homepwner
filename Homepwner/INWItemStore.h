@@ -10,7 +10,7 @@
 
 @class INWitem;
 
-@interface INWItemStore : NSObject
+@interface INWItemStore : NSObject 
 
 +(instancetype) sharedStore;
 
@@ -24,5 +24,11 @@
                   toIndex: (NSInteger) destination;
 
 -(NSInteger) lastObjectIndex;
+
+-(NSURL*)defaultsavePath;
+
+-(BOOL) savingStore;
+
+-(BOOL) loadingSavedStore;
 
 @end

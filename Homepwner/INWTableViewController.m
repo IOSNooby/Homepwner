@@ -11,6 +11,7 @@
 #import "INWitem.h"
 #import "SecondVC.h"
 #import "neoCell.h"
+#import "ImageStore.h"
 
 @interface INWTableViewController ()
 
@@ -107,7 +108,10 @@
                                               target:self action:@selector(addNewItem_Helper)];
     
     [self.tableView setTableHeaderView:self.headerView];
+     self.refreshControl = [UIRefreshControl new];
     
+    [self.refreshControl addTarget:self action:@selector(refreshSelf:)
+                  forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark Lazy inits
@@ -166,9 +170,6 @@
         // name the last View cell appearance
         cell.myLabel.text = @"...";
     }
-    
-    NSLog(@"What the HELL IS CELL NOW ? = %@",cell);
-
     
     return cell;
     
@@ -230,9 +231,11 @@
 -(void) tableView:(UITableView *)tableView
                     moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
                            toIndexPath:(NSIndexPath *)destinationIndexPath{
-    
+
+    if(destinationIndexPath.row != [tableView numberOfRowsInSection:0]-1){
       [[INWItemStore sharedStore] moveItemFromIndex:sourceIndexPath.row
                                           toIndex:destinationIndexPath.row];
+    }
 }
 
 -(BOOL) tableView:(UITableView *)tableView
@@ -249,40 +252,58 @@
 
 -(void)tableView:(UITableView *)tableView
                   didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    // fetch data from Store 
     if(indexPath.row != [[[INWItemStore sharedStore]allItems]count]){
     
         NSMutableArray* itemArray = [[INWItemStore sharedStore] allItems];
     
         INWitem* a = [itemArray objectAtIndex:indexPath.row];
         
-        SecondVC* detailVC = [[SecondVC alloc]init];
+        SecondVC* detailVC = [[SecondVC alloc]initWithNewItem:NO];
         detailVC.item = a;
+        
         [self.navigationController pushViewController:detailVC animated:YES];
         
     }
 }
 
 
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView 
- commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
 #pragma mark Helpers Methods
 
-// This method run inside both Navigation's SystemButton "Add" and also Xib custom Header "add" button
+// This method run inside both Navigation's SystemButton "Add"
+// and also Xib custom Header "add" button
 
 -(void) addNewItem_Helper{
+   
+    INWitem* new = [[INWItemStore sharedStore]createINWItem];
+    SecondVC*  vc = [[SecondVC alloc]initWithNewItem:YES];
+    vc.item = new;
+    vc.refreshTVBlock =^{ [self.tableView reloadData];};
+
+    // alloc init new SecondVC , Blank Data
+    // show those second VC in MODAL
+    
+    UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:vc];
+    
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+
+
+
+
+-(void) refreshSelf: (UIRefreshControl*) sender {
+    
+    [sender endRefreshing];
+
+}
+
+#pragma mark Unused Methods (Old versions)
+
+// this method is Oldversion (unused)
+-(void) addNewRandomItemAndNewCell{
     // Reason why buggy : self.tableView max Index = 9 , but you InsertRow at 10.
     INWitem* new = [[INWItemStore sharedStore] createINWItem];
     // the moment you createdINWItem , store size +1
@@ -293,9 +314,5 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationTop];
     
-    // At last , Insert ROW at [10] position
 }
-
-
-
 @end

@@ -1,22 +1,36 @@
 //
-//  ViewController.m
+//  InsaneToolVC.m
 //  Homepwner
 //
-//  Created by Zenjougahara on 12/12/14.
-//  Copyright (c) 2014 Zenjougahara. All rights reserved.
+//  Created by Padme on 1/23/15.
+//  Copyright (c) 2015 Zenjougahara. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "InsaneToolVC.h"
 
-@interface ViewController ()
+@interface InsaneToolVC ()
 
 @end
 
-@implementation ViewController
+@implementation InsaneToolVC
+
+-(UIView*) baseView{
+    
+    if(!_baseView){
+        [[NSBundle mainBundle]loadNibNamed:@"InsaneTools"
+                                     owner:self
+                                   options:nil];
+    }
+    return _baseView;
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self.view addSubview:self.baseView];
 }
 
 - (void)didReceiveMemoryWarning {

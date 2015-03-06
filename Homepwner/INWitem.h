@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface INWitem : NSObject
+@interface INWitem : NSObject <NSCoding>
 
 @property (nonatomic,strong) NSString* itemName;
 @property (nonatomic,strong) NSString* serialNumber;
-@property (nonatomic) NSInteger valueInDollars;
+
+@property (nonatomic,strong) NSNumber* valueInDollars;
 @property (nonatomic,strong) NSDate* dateCreated;
 
+@property (strong,nonatomic,readonly) NSString* myUUID;
+
+
 +(INWitem*) randomItem;
++(INWitem*) createBlankItem;
 
 @end

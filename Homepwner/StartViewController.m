@@ -8,7 +8,7 @@
 
 #import "StartViewController.h"
 #import "INWTableViewController.h"
-
+#import "InsaneToolVC.h"
 
 @interface StartViewController ()
 
@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.viewScreen];
+    self.view = self.viewScreen;
 }
 
 
@@ -39,10 +39,15 @@
     
     // create the VC you wanna see next
     // call the GOD (UINavigation) to replace the topmost VC of the stack (PushVC) (This  code invoke view changing)
+    
+    //InsaneToolVC* insane =[[InsaneToolVC alloc]init];
+    
     INWTableViewController* inwTable = [[INWTableViewController alloc]init];
     [self.navigationController pushViewController:inwTable animated:YES];
     
 }
+
+
 
 
 @end
