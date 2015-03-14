@@ -28,7 +28,6 @@
 -(NSURL*)defaultsavePath;
 
 -(BOOL) savingStore;
-
 -(BOOL) loadingSavedStore;
 
 @end

@@ -18,6 +18,16 @@
 
 -(UIImage*) getImageFromKey:(NSString*) nameKey;
 -(void) deleteImageByKey:(NSString*) nameKey;
--(BOOL) saveStore;
--(BOOL) loadStore;
+
+-(void) deleteOnlyImageInImageStoreDic:(NSString*)nameKey;
+
+// this two methods called when VC disappear
+
+-(BOOL) saveStoreToPersistent;
+
+//-(BOOL) loadStore;
+
+-(void) clearStore;
+-(NSInteger) howmanyCount;
+-(NSInteger) howmanyInSandbox;
 @end

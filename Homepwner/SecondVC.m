@@ -35,10 +35,15 @@
 
 @implementation SecondVC
 
-#pragma mark Lazy init
+#pragma mark Property Lazy init
 
-
-
+-(UIView *)myview{
+    if(!_myview){
+        [[NSBundle mainBundle] loadNibNamed:@"SecondView"
+                                      owner:self options:nil];
+    }
+    return _myview;
+}
 
 -(UIImagePickerController*) imgPicker{
     
@@ -110,7 +115,7 @@
     self.imgView.image  = nil;
 }
 
-#pragma mark Init and Didload
+#pragma mark Init
 
 // Override to Erectile Dysfuction
 
@@ -123,7 +128,6 @@
     
     return nil;
 }
-
 
 
 // this Method use in case CreateNew CELL ROW only
@@ -143,13 +147,8 @@
     return self;
 }
 
--(UIView *)myview{
-    if(!_myview){
-        [[NSBundle mainBundle] loadNibNamed:@"SecondView"
-                                      owner:self options:nil];
-    }
-    return _myview;
-}
+
+#pragma mark VC Life Cycle
 
 -(void) viewDidLoad{
     
@@ -158,6 +157,7 @@
     
     [self defineDelegateOfEachTextfields];
     [self defineTagToEachTextfields];
+    [self preparePlaceHolders];
     [self LetsHideKeyboardWhenTouchingEmptyArea];
     
 }
@@ -166,9 +166,11 @@
     
     [super viewWillAppear:animated];
     [self loadData];
-    [self loadImage];
+    
+   // if(self.item.hasImage == NO){
+        [self loadImageFromStore];
+   // }
     [self loadDateData];
-    NSLog(@" where da hell is img %@",((self.imgView.image) ? @"Y" : @"N"));
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -177,8 +179,20 @@
     [self.view endEditing:YES]; // dismissKeyboard
     
     [self saveData];
-    [self loadImage];
-
+    NSLog(@"saveImageData RUN (buggySpot)");
+    
+    [self saveImageData];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad){
+       [self loadImageFromStore];
+    }
+    
+    [self comfirmThisItemHasImageOrNot];
+    [[ImageStore singletonImageStore]clearStore];
+    
+    NSLog(@"howmany in ImageStore Dic %ld",(long)[[ImageStore singletonImageStore] howmanyCount]);
+    NSLog(@"howmany IN PERSISTENT  %ld " ,(long) [[ImageStore singletonImageStore] howmanyInSandbox]);
+    
 }
 
 
@@ -188,8 +202,18 @@
     
     self.item.itemName = self.namdField.text;
     self.item.serialNumber =  self.serialField.text;
-    self.item.valueInDollars = [NSNumber numberWithInteger:[self.valueField.text  intValue]];
+    
+    if(self.valueField.text != nil){
+       self.item.valueInDollars = [NSNumber numberWithInteger:[self.valueField.text  intValue]];
+    }
+    ///
+    //[[ImageStore singletonImageStore] deleteOnlyImageInImageStoreDic:self.item.myUUID];
+}
 
+// called in viewWillDisappear
+-(void) saveImageData{
+    BOOL succeedsaveStore =[[ImageStore singletonImageStore] saveStoreToPersistent];
+    NSLog(@"succeed savestore = %i",succeedsaveStore);
 }
 
 -(void) saveCurrentDate{
@@ -198,28 +222,24 @@
 
 }
 
--(void) loadData{
-    self.namdField.text = self.item.itemName;
-    self.serialField.text = self.item.serialNumber;
-    self.valueField.text =   [NSString stringWithFormat:@"%@",self.item.valueInDollars];
-}
-
-
--(void) loadImage{
+-(void) loadImageFromStore{
+    // Load EXISTING image from store (if this Object really has image)
     
-    NSLog(@"loading img in Secondvc = ");
-
     self.imgView.image = [[ImageStore singletonImageStore]
                           getImageFromKey:self.item.myUUID];
     
-    NSLog(@"item uuid  = %@",self.item.myUUID);
-
-    NSLog(@"does self imgview has img loaded ? = %@",(self.imgView.image) ? @"Y":@"N" );
-
     [self.imgView setNeedsDisplay];
-
+    
 }
 
+-(void) loadData{
+    self.namdField.text = self.item.itemName;
+    self.serialField.text = self.item.serialNumber;
+    if(self.item.valueInDollars ){
+
+       self.valueField.text =   [NSString stringWithFormat:@"%@",self.item.valueInDollars];
+    }
+}
 
 -(void) loadDateData{
     
@@ -255,17 +275,14 @@
     
     // "info" is Dictionary !
     
+    // connect between Array - Dictionary (two diffrent ADT)
+    // ( Normally , sequenced ADT cant compatible with unsequenced ADT )
+    // UUID bridge this GAP !
     UIImage* img = info[UIImagePickerControllerOriginalImage];
-    
-    //UIImage* img = info[UIImagePickerControllerOriginalImage];
     self.imgView.image = img;
 
     [[ImageStore singletonImageStore] setImage:img
                                    withNameKey:self.item.myUUID];
-    // connect between Array - Dictionary (two diffrent ADT)
-    // ( Normally , sequenced ADT cant compatible with unsequenced ADT )
-    // UUID bridge this GAP !
-    
     
     NSURL* mediaURL = info[UIImagePickerControllerMediaURL];
     if(mediaURL){
@@ -294,7 +311,6 @@
     else{
        [self dismissViewControllerAnimated:YES completion:nil];
     }
-
 }
 
 #pragma mark UIPopover Delegate
@@ -305,10 +321,21 @@
     
 }
 
-#pragma mark Helper Methods
+#pragma mark Helper Methods Shorten Codes
+
+-(void) comfirmThisItemHasImageOrNot{
+    if(self.imgView.image){
+        self.item.hasImage = YES;
+    }
+    else{
+        self.item.hasImage = NO;
+    }
+}
+
+
 
 -(void) save: (UIBarButtonItem*) sender {
-    
+    // Use with Button
     [self saveData];
     [self saveCurrentDate];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:
@@ -317,6 +344,7 @@
 }
 
 -(void) cancel: (UIBarButtonItem*) sender{
+    // Use with Button
     [[INWItemStore sharedStore]removeItem:self.item];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:
      self.refreshTVBlock];
@@ -338,6 +366,12 @@
     
 }
 
+-(void) preparePlaceHolders{
+    self.namdField.placeholder = @"name here";
+    self.serialField.placeholder = @"serial number";
+    self.valueField.placeholder = @"value number";
+}
+
 -(void) defineDelegateOfEachTextfields{
     
     self.namdField.delegate  = self;
@@ -351,6 +385,13 @@
     self.serialField.tag = 2;
     self.valueField.tag =3;
 }
+
+-(void) addSubviewsToBossView{
+    [self.view addSubview:self.Date];
+    [self.view addSubview:self.toolBar];
+    [self.view addSubview:self.imgView];
+}
+
 
 -(void) saveToDataModelAndDismissKeyboardOfTextField:(UITextField*) textField{
     
@@ -374,6 +415,8 @@
     }
 }
 
+#pragma mark Helpers Method Conversion
+
 -(id) ConvertToPropertyModel:(id) propertyInModel
                          textToConvert:(NSString*) text {
     
@@ -389,11 +432,6 @@
     return nil;
 }
 
--(void) addSubviewsToBossView{
-    [self.view addSubview:self.Date];
-    [self.view addSubview:self.toolBar];
-    [self.view addSubview:self.imgView];
-}
 
 #pragma mark Navigations
 
@@ -439,7 +477,6 @@
 
         }
     }
-   
 }
 
 

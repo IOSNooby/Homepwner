@@ -18,6 +18,7 @@
 
 @property (strong,nonatomic,readonly) NSString* myUUID;
 
+@property (nonatomic) BOOL hasImage;
 
 +(INWitem*) randomItem;
 +(INWitem*) createBlankItem;

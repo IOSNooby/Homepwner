@@ -24,6 +24,7 @@
     self = [super init];
     if(self){
         [self autoCreateUUIDForThisItem];
+         self.hasImage = NO;
     }
     return  self;
 }
@@ -37,6 +38,8 @@
         _valueInDollars = [aDecoder decodeObjectForKey:@"valueInDollars"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
         _myUUID = [aDecoder decodeObjectForKey:@"myUUID"];
+        
+        _hasImage = [aDecoder decodeBoolForKey:@"hasImage"];
     }
     return self;
 }
@@ -74,6 +77,8 @@
     [aCoder encodeObject:self.valueInDollars forKey:@"valueInDollars"];
     [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
     [aCoder encodeObject:self.myUUID forKey:@"myUUID"];
+    
+    [aCoder encodeBool:self.hasImage forKey:@"hasImage"];
     
 }
 
