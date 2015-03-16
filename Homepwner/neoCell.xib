@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -14,11 +14,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCN-of-nEJ">
-                        <rect key="frame" x="250" y="7" width="51" height="31"/>
+                        <rect key="frame" x="260" y="8" width="51" height="31"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="49" id="D7p-NK-89f"/>
                             <constraint firstAttribute="height" constant="31" id="Jlf-KH-ira"/>
                         </constraints>
+                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="250" y="8" width="51" height="31"/>
+                        </variation>
                         <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                             <rect key="frame" x="251" y="8" width="51" height="31"/>
                             <mask key="constraints">
@@ -26,33 +29,57 @@
                                 <include reference="Jlf-KH-ira"/>
                             </mask>
                         </variation>
+                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                            <rect key="frame" x="250" y="8" width="51" height="31"/>
+                        </variation>
                     </switch>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yf6-M7-fA0">
-                        <rect key="frame" x="36" y="14" width="145" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="92" placeholderIntrinsicHeight="21" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yf6-M7-fA0">
+                        <rect key="frame" x="36" y="16" width="92" height="21"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Cik-dh-wxG"/>
-                            <constraint firstAttribute="width" constant="145" id="GUh-lr-zwo"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="36" y="15" width="145" height="21"/>
+                        </variation>
                         <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
                             <rect key="frame" x="36" y="15" width="145" height="21"/>
                             <mask key="constraints">
                                 <include reference="Cik-dh-wxG"/>
-                                <include reference="GUh-lr-zwo"/>
                             </mask>
                         </variation>
+                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                            <rect key="frame" x="36" y="15" width="145" height="21"/>
+                        </variation>
                     </label>
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="WuY-Me-8hW">
+                        <rect key="frame" x="136" y="11" width="116" height="26"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="leb-ZY-PWW"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yf6-M7-fA0" firstAttribute="bottom" secondItem="rCN-of-nEJ" secondAttribute="bottom" constant="-3" id="0HR-sg-h3l"/>
-                    <constraint firstItem="yf6-M7-fA0" firstAttribute="top" secondItem="Ykv-2z-7u7" secondAttribute="topMargin" constant="6" id="4NI-pN-pG8">
+                    <constraint firstItem="yf6-M7-fA0" firstAttribute="bottom" secondItem="rCN-of-nEJ" secondAttribute="bottom" constant="-2" id="0HR-sg-h3l"/>
+                    <constraint firstItem="yf6-M7-fA0" firstAttribute="top" secondItem="Ykv-2z-7u7" secondAttribute="topMargin" constant="8" id="4NI-pN-pG8">
                         <variation key="heightClass=compact-widthClass=regular" constant="6"/>
                     </constraint>
+                    <constraint firstItem="WuY-Me-8hW" firstAttribute="leading" secondItem="yf6-M7-fA0" secondAttribute="trailing" constant="8" id="Gsc-Jw-M3h"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rCN-of-nEJ" secondAttribute="trailing" constant="40" id="LQv-5i-a8y"/>
                     <constraint firstItem="yf6-M7-fA0" firstAttribute="leading" secondItem="Ykv-2z-7u7" secondAttribute="leadingMargin" constant="28" id="WRf-M3-igU"/>
+                    <constraint firstItem="rCN-of-nEJ" firstAttribute="leading" secondItem="WuY-Me-8hW" secondAttribute="trailing" constant="8" id="cna-s1-afg"/>
+                    <constraint firstItem="yf6-M7-fA0" firstAttribute="bottom" secondItem="WuY-Me-8hW" secondAttribute="bottom" id="gcc-fa-rNo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="rCN-of-nEJ" secondAttribute="trailing" constant="50" id="kEd-Tg-0gl"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="kEd-Tg-0gl"/>
+                    </mask>
+                </variation>
                 <variation key="heightClass=compact-widthClass=regular">
                     <mask key="constraints">
                         <include reference="0HR-sg-h3l"/>
@@ -65,7 +92,7 @@
             <connections>
                 <outlet property="myLabel" destination="yf6-M7-fA0" id="yKn-Pn-XAu"/>
             </connections>
-            <point key="canvasLocation" x="385.5" y="248.5"/>
+            <point key="canvasLocation" x="141.5" y="126.5"/>
         </tableViewCell>
     </objects>
 </document>

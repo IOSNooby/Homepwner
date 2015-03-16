@@ -23,6 +23,8 @@
 		2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1CC1A3AF5300011785B /* HeaderView.xib */; };
 		2386A1D01A4080830011785B /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1CF1A4080830011785B /* SecondVC.m */; };
 		2386A1D21A408C100011785B /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1D11A408C100011785B /* SecondView.xib */; };
+		45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D75F191AB59A390071FA28 /* superCell.xib */; };
+		45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D75F1C1AB59A9F0071FA28 /* superCellClass.m */; };
 		45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DC698E1A727AA60028231F /* InsaneTools.xib */; };
 		45E7D31B1A73FE6100F16E5F /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E7D31A1A73FE6100F16E5F /* ImageStore.m */; };
 		45EE78511A729DBD001CA0C5 /* InsaneToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EE78501A729DBD001CA0C5 /* InsaneToolVC.m */; };
@@ -57,14 +59,12 @@
 		2372AC011A5DD9E1002C06F7 /* StartScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartScreen.xib; sourceTree = "<group>"; };
 		2372AC031A5DDB97002C06F7 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		2372AC041A5DDB97002C06F7 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
-		2386A1951A3724000011785B /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Homepwner.app; path = "/Users/Padme/Desktop/Big NERD/myCodes/Homepwner/build/Debug-iphoneos/Homepwner.app"; sourceTree = "<absolute>"; };
 		2386A1991A3724000011785B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2386A19A1A3724000011785B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2386A19C1A3724000011785B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2386A19D1A3724000011785B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2386A1A51A3724000011785B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2386A1A81A3724000011785B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		2386A1AE1A3724000011785B /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = HomepwnerTests.xctest; path = "/Users/Padme/Desktop/Big NERD/myCodes/Homepwner/build/Debug-iphoneos/HomepwnerTests.xctest"; sourceTree = "<absolute>"; };
 		2386A1B31A3724000011785B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2386A1B41A3724000011785B /* HomepwnerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomepwnerTests.m; sourceTree = "<group>"; };
 		2386A1BE1A3757D80011785B /* INWTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWTableViewController.h; sourceTree = "<group>"; };
@@ -79,6 +79,11 @@
 		2386A1CE1A4080830011785B /* SecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondVC.h; sourceTree = "<group>"; };
 		2386A1CF1A4080830011785B /* SecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondVC.m; sourceTree = "<group>"; };
 		2386A1D11A408C100011785B /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
+		45D75F171AB49EA90071FA28 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D75F191AB59A390071FA28 /* superCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = superCell.xib; sourceTree = "<group>"; };
+		45D75F1B1AB59A9F0071FA28 /* superCellClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = superCellClass.h; sourceTree = SOURCE_ROOT; };
+		45D75F1C1AB59A9F0071FA28 /* superCellClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = superCellClass.m; sourceTree = SOURCE_ROOT; };
 		45DC698E1A727AA60028231F /* InsaneTools.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InsaneTools.xib; sourceTree = "<group>"; };
 		45E7D3191A73FE6100F16E5F /* ImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		45E7D31A1A73FE6100F16E5F /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				236BED0E1A61DDC2007020C7 /* neoCell.xib */,
+				45D75F191AB59A390071FA28 /* superCell.xib */,
 				2372AC011A5DD9E1002C06F7 /* StartScreen.xib */,
 				2386A1D11A408C100011785B /* SecondView.xib */,
 				2386A1CC1A3AF5300011785B /* HeaderView.xib */,
@@ -121,6 +127,8 @@
 			children = (
 				236BED101A61DE2D007020C7 /* neoCell.h */,
 				236BED111A61DE2D007020C7 /* neoCell.m */,
+				45D75F1B1AB59A9F0071FA28 /* superCellClass.h */,
+				45D75F1C1AB59A9F0071FA28 /* superCellClass.m */,
 			);
 			name = "Xib Classes";
 			sourceTree = "<group>";
@@ -131,6 +139,8 @@
 				45EE78521A729DD5001CA0C5 /* Special Version */,
 				2386A1971A3724000011785B /* Homepwner */,
 				2386A1B11A3724000011785B /* HomepwnerTests */,
+				45D75F171AB49EA90071FA28 /* Homepwner.app */,
+				45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -232,7 +242,7 @@
 			);
 			name = Homepwner;
 			productName = Homepwner;
-			productReference = 2386A1951A3724000011785B /* Homepwner.app */;
+			productReference = 45D75F171AB49EA90071FA28 /* Homepwner.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2386A1AD1A3724000011785B /* HomepwnerTests */ = {
@@ -250,7 +260,7 @@
 			);
 			name = HomepwnerTests;
 			productName = HomepwnerTests;
-			productReference = 2386A1AE1A3724000011785B /* HomepwnerTests.xctest */;
+			productReference = 45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -300,6 +310,7 @@
 				2386A1D21A408C100011785B /* SecondView.xib in Resources */,
 				236BED0F1A61DDC2007020C7 /* neoCell.xib in Resources */,
 				45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */,
+				45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */,
 				2386A1A61A3724000011785B /* Images.xcassets in Resources */,
 				2372AC021A5DD9E1002C06F7 /* StartScreen.xib in Resources */,
 			);
@@ -323,6 +334,7 @@
 				45EE78511A729DBD001CA0C5 /* InsaneToolVC.m in Sources */,
 				2386A1CB1A3A58B70011785B /* ViewController.m in Sources */,
 				2386A1C31A3777440011785B /* INWitem.m in Sources */,
+				45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */,
 				236BED121A61DE2D007020C7 /* neoCell.m in Sources */,
 				2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */,
 				2386A1C61A383BF80011785B /* INWItemStore.m in Sources */,

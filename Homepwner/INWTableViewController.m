@@ -97,10 +97,10 @@
     */
     
     UINib* thenib = [UINib nibWithNibName:@"neoCell" bundle:nil]; // aka mainbundle
-    
     [self.tableView registerNib:thenib  forCellReuseIdentifier:@"neoCellX" ];
+    // tell tableview whats nibfile you wann use ?
+    // register cell by specify "name of cell" and specify "where does the cell from"
     
-   
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]

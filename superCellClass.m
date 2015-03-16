@@ -1,15 +1,14 @@
 //
-//  neoCell.m
+//  superCellClass.m
 //  Homepwner
 //
-//  Created by Zenjougahara on 1/11/15.
+//  Created by Padme on 3/15/15.
 //  Copyright (c) 2015 Zenjougahara. All rights reserved.
 //
 
-#import "neoCell.h"
+#import "superCellClass.h"
 
-@implementation neoCell
-
+@implementation superCellClass
 
 - (void)awakeFromNib {
     // Initialization code
@@ -21,16 +20,4 @@
     // Configure the view for the selected state
 }
 
-// override deafult property
-
--(UILabel*) textLabel{
-    return nil;
-}
-
--(UILabel*) detailTextLabel{
-    return nil;
-}
--(UIImageView*) imageView{
-    return nil;
-}
 @end
