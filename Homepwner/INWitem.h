@@ -23,4 +23,6 @@
 +(INWitem*) randomItem;
 +(INWitem*) createBlankItem;
 
+
+
 @end

@@ -20,4 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *value;
 
 
+-(void) setThumbnailFromImage:(UIImage*) imageOriginal;
+
 @end

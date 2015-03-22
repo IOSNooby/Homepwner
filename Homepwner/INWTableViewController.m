@@ -10,8 +10,12 @@
 #import "INWItemStore.h"
 #import "INWitem.h"
 #import "SecondVC.h"
+
 #import "neoCell.h"
+#import "superCellClass.h"
+
 #import "ImageStore.h"
+#import "thumbStore.h"
 
 @interface INWTableViewController ()
 
@@ -33,7 +37,6 @@
 }
 
 
-
 // this method loading the NIB (Graphics Information)
 -(UIView*) headerView{
     
@@ -45,7 +48,6 @@
 }
 
 #pragma mark IBActions
-
 
 
 -(IBAction)addNewItem:(id)sender
@@ -98,6 +100,10 @@
     
     UINib* thenib = [UINib nibWithNibName:@"neoCell" bundle:nil]; // aka mainbundle
     [self.tableView registerNib:thenib  forCellReuseIdentifier:@"neoCellX" ];
+    
+    UINib* supercellNib =[UINib nibWithNibName:@"superCell" bundle:nil];
+    [self.tableView registerNib:supercellNib forCellReuseIdentifier:@"SuperCellX"];
+    
     // tell tableview whats nibfile you wann use ?
     // register cell by specify "name of cell" and specify "where does the cell from"
     
@@ -149,28 +155,33 @@
     
     /// make test CustomCell using Xib
     
-   // [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
-
-     neoCell * cell = [tableView
-            dequeueReusableCellWithIdentifier:@"neoCellX"
-                                 forIndexPath:indexPath];
+     superCellClass * cell = [tableView dequeueReusableCellWithIdentifier:@"SuperCellX" forIndexPath:indexPath];
+    
     // ---* this Code Work !!!*-----
     
     /*NSArray* n = [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
 
     newCellTableViewCell* cell  = [n firstObject];
     */
+    /// testing
     
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
-        cell.myLabel.text = item.itemName;
-        cell.textLabel.text = item.itemName;
+       
+        cell.Name.text = item.itemName;
+        cell.serial.text = item.serialNumber;
+        cell.value.text = [NSString  stringWithFormat:@"%@",item.valueInDollars ] ;
+        
+        ///
+        cell.imageThumb =  [[thumbStore sharedStore]imageDic][item.myUUID] ;
+        
     }
     else if(indexPath.row == [[[INWItemStore sharedStore] allItems]count]){
         // name the last View cell appearance
-        cell.myLabel.text = @"...";
+         cell.Name.text = @"...";
     }
     
+    cell.Name.text = @"MyLoveISStablerNaja";
     return cell;
     
 }
@@ -292,13 +303,27 @@
 
 
 
-
-
 -(void) refreshSelf: (UIRefreshControl*) sender {
     
     [sender endRefreshing];
 
 }
+
+-(id) ConvertToPropertyModel:(id) propertyInModel
+               textToConvert:(NSString*) text {
+    
+    if([propertyInModel isKindOfClass:[NSNumber class]]){
+        
+        return [NSNumber numberWithInteger:[text integerValue]];
+    }
+    else if([propertyInModel isKindOfClass:[NSString class]]){
+        
+        return text;
+    }
+    
+    return nil;
+}
+
 
 #pragma mark Unused Methods (Old versions)
 

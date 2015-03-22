@@ -23,6 +23,7 @@
 		2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1CC1A3AF5300011785B /* HeaderView.xib */; };
 		2386A1D01A4080830011785B /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1CF1A4080830011785B /* SecondVC.m */; };
 		2386A1D21A408C100011785B /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1D11A408C100011785B /* SecondView.xib */; };
+		4506599D1AB89A7000940810 /* thumbStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4506599C1AB89A7000940810 /* thumbStore.m */; };
 		45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D75F191AB59A390071FA28 /* superCell.xib */; };
 		45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D75F1C1AB59A9F0071FA28 /* superCellClass.m */; };
 		45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DC698E1A727AA60028231F /* InsaneTools.xib */; };
@@ -79,6 +80,8 @@
 		2386A1CE1A4080830011785B /* SecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondVC.h; sourceTree = "<group>"; };
 		2386A1CF1A4080830011785B /* SecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondVC.m; sourceTree = "<group>"; };
 		2386A1D11A408C100011785B /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
+		4506599B1AB89A7000940810 /* thumbStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thumbStore.h; sourceTree = "<group>"; };
+		4506599C1AB89A7000940810 /* thumbStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thumbStore.m; sourceTree = "<group>"; };
 		45D75F171AB49EA90071FA28 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F191AB59A390071FA28 /* superCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = superCell.xib; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				2386A1C51A383BF80011785B /* INWItemStore.m */,
 				45E7D3191A73FE6100F16E5F /* ImageStore.h */,
 				45E7D31A1A73FE6100F16E5F /* ImageStore.m */,
+				4506599B1AB89A7000940810 /* thumbStore.h */,
+				4506599C1AB89A7000940810 /* thumbStore.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				2386A1CB1A3A58B70011785B /* ViewController.m in Sources */,
 				2386A1C31A3777440011785B /* INWitem.m in Sources */,
 				45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */,
+				4506599D1AB89A7000940810 /* thumbStore.m in Sources */,
 				236BED121A61DE2D007020C7 /* neoCell.m in Sources */,
 				2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */,
 				2386A1C61A383BF80011785B /* INWItemStore.m in Sources */,
