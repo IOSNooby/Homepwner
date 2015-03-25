@@ -149,13 +149,16 @@
     return  [[[INWItemStore sharedStore] allItems]count] +1 ;
 }
 
+
+
+
+
+#pragma mark Cell Modifications 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     /// make test CustomCell using Xib
-    
-     superCellClass * cell = [tableView dequeueReusableCellWithIdentifier:@"SuperCellX" forIndexPath:indexPath];
     
     // ---* this Code Work !!!*-----
     
@@ -165,24 +168,46 @@
     */
     /// testing
     
+    UITableViewCell* cellOut;
+    
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
+        superCellClass * cell = [tableView dequeueReusableCellWithIdentifier:@"SuperCellX" forIndexPath:indexPath];
+
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
        
         cell.Name.text = item.itemName;
         cell.serial.text = item.serialNumber;
-        cell.value.text = [NSString  stringWithFormat:@"%@",item.valueInDollars ] ;
         
-        ///
-        cell.imageThumb =  [[thumbStore sharedStore]imageDic][item.myUUID] ;
+        cell.value.text = [NSString  stringWithFormat:@"$%@",item.valueInDollars ] ;
         
+        UIColor* colorForPrice;
+        
+        if(item.valueInDollars.integerValue > 99){
+              colorForPrice = [UIColor redColor];
+        }
+        else {colorForPrice = [UIColor greenColor];
+        }
+
+        cell.value.textColor = colorForPrice;
+        
+        // fetch from dictionary (shallow store)
+         UIImage* img = [[thumbStore sharedStore] loadFromPersistentByKey:item.myUUID];
+         [[thumbStore sharedStore]addImageToDic:img WithKey:item.myUUID];
+        
+        cell.imageThumb.image =  [[thumbStore sharedStore]imageDic][item.myUUID] ;
+        
+        NSLog(@"IMG THUMB = %@",cell.imageThumb);
+
+        cellOut = cell;
     }
     else if(indexPath.row == [[[INWItemStore sharedStore] allItems]count]){
+        neoCell* neoCell = [tableView dequeueReusableCellWithIdentifier:@"neoCellX" forIndexPath:indexPath];
         // name the last View cell appearance
-         cell.Name.text = @"...";
+        neoCell.myLabel.text = @"...";
+        cellOut = neoCell;
     }
     
-    cell.Name.text = @"MyLoveISStablerNaja";
-    return cell;
+    return cellOut;
     
 }
 
@@ -190,6 +215,10 @@
     
     return 60;
 }
+
+
+#pragma mark Edit / Add
+
 
 -(void) tableView:(UITableView *)tableView
              commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -238,6 +267,7 @@
     }
     return toreturn;
 }
+#pragma mark Moving Cell
 
 -(void) tableView:(UITableView *)tableView
                     moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath

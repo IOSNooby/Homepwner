@@ -8,11 +8,18 @@
 
 #import "thumbStore.h"
 
+@interface thumbStore ()
+
+@property(strong,nonatomic,readwrite) NSMutableDictionary* imageDic;
+
+
+@end
+
+
 @implementation thumbStore
 
-
-
 #pragma mark init Methods
+
 
 -(instancetype) init {
     NSException* ex = [[NSException alloc]initWithName:@"YO"
@@ -26,25 +33,22 @@
     
     self = [super init];
     if(self){
-        
+        _imageDic = [[NSMutableDictionary alloc]init];
     }
     return self;
 }
 
+
 #pragma mark Getter Setter
 // very encapsulated
--(NSMutableDictionary*) getImageDic{
-    
+-(NSMutableDictionary*) imageDic{
     if(!_imageDic){
-        _imageDic =  [NSMutableDictionary new];
+    _imageDic = [[NSMutableDictionary alloc]init];
+        
     }
-    
-    return _imageDic ;
+    return _imageDic;
 }
 
--(void) setImageDic:(NSMutableDictionary *)imageDic{
-    _imageDic =imageDic;
-}
 
 #pragma mark SingleTon
 +(thumbStore*) sharedStore{
@@ -109,9 +113,7 @@
     return image;
 }
 
-
-
-#pragma mark Data Sources
+#pragma mark Data Sources (Private)
 
 -(NSURL*) defaultSaveURL{
     NSFileManager* manager  = [NSFileManager defaultManager];
@@ -123,8 +125,7 @@
 
 }
 
-#pragma mark Helper Methods
-
+#pragma mark Helper Methods  (Private)
 
 // "Save one by one paradigm"
 
@@ -133,7 +134,7 @@
     return placeOfFile;
 }
 
-#pragma mark Unused Methods (Old ver.)
+#pragma mark Unused Methods (Old ver.)  (Private)
 
 //  "Save All at once" paradigm   (May not use)
 // should call this at beginning

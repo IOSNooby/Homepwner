@@ -11,7 +11,7 @@
 
 @interface thumbStore : NSObject
 
-@property(strong,nonatomic) NSMutableDictionary* imageDic;
+@property(strong,nonatomic,readonly) NSMutableDictionary* imageDic;
 
 +(thumbStore*) sharedStore;
 

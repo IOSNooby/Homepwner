@@ -11,6 +11,9 @@
 #import "INWItemStore.h"
 #import "ImageStore.h"
 
+#import "thumbGenerator.h"
+#import "thumbStore.h"
+
 @interface SecondVC () <UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPopoverControllerDelegate>
 
 
@@ -293,7 +296,7 @@
         }
     }
     // Release from memory (Dont worry about dangling pointer ,
-    // Cuz "picker" parameter above , still hold these object. Till the end of this Deleagate operation.
+    // Cuz "picker" parameter above , still hold these object. Till the end of this Delegate operation.
     
     self.imgPicker = nil;
     
@@ -305,12 +308,18 @@
         self.cameraPopOver = nil;
         [self dismissViewControllerAnimated:YES completion:nil];
 
-
     }
     // case 2 : iPhone (FullScreen Modal)
     else{
        [self dismissViewControllerAnimated:YES completion:nil];
     }
+    
+    // Add Generate small image from big image
+    // store small image with UUID of current item
+    UIImage* thumbnailImg = [thumbGenerator bigImageToThumbnail:self.imgView.image];
+    [[thumbStore sharedStore]addImageToDic:thumbnailImg WithKey:self.item.myUUID];
+    [[thumbStore sharedStore]saveToPersistent:thumbnailImg WithKey:self.item.myUUID];
+    
 }
 
 #pragma mark UIPopover Delegate

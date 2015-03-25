@@ -24,6 +24,7 @@
 		2386A1D01A4080830011785B /* SecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2386A1CF1A4080830011785B /* SecondVC.m */; };
 		2386A1D21A408C100011785B /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1D11A408C100011785B /* SecondView.xib */; };
 		4506599D1AB89A7000940810 /* thumbStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4506599C1AB89A7000940810 /* thumbStore.m */; };
+		450659A01ABEAE3400940810 /* thumbGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4506599F1ABEAE3400940810 /* thumbGenerator.m */; };
 		45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D75F191AB59A390071FA28 /* superCell.xib */; };
 		45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D75F1C1AB59A9F0071FA28 /* superCellClass.m */; };
 		45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DC698E1A727AA60028231F /* InsaneTools.xib */; };
@@ -82,6 +83,8 @@
 		2386A1D11A408C100011785B /* SecondView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondView.xib; sourceTree = "<group>"; };
 		4506599B1AB89A7000940810 /* thumbStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thumbStore.h; sourceTree = "<group>"; };
 		4506599C1AB89A7000940810 /* thumbStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thumbStore.m; sourceTree = "<group>"; };
+		4506599E1ABEAE3400940810 /* thumbGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thumbGenerator.h; sourceTree = "<group>"; };
+		4506599F1ABEAE3400940810 /* thumbGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thumbGenerator.m; sourceTree = "<group>"; };
 		45D75F171AB49EA90071FA28 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F191AB59A390071FA28 /* superCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = superCell.xib; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 			children = (
 				2386A19C1A3724000011785B /* AppDelegate.h */,
 				2386A19D1A3724000011785B /* AppDelegate.m */,
+				450659A11ABEAE4500940810 /* Converter */,
 				2386A1C71A3A40B10011785B /* Model */,
 				2386A1C81A3A40D20011785B /* Controller */,
 				2386A1A51A3724000011785B /* Images.xcassets */,
@@ -216,6 +220,15 @@
 				2386A1CF1A4080830011785B /* SecondVC.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		450659A11ABEAE4500940810 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				4506599E1ABEAE3400940810 /* thumbGenerator.h */,
+				4506599F1ABEAE3400940810 /* thumbGenerator.m */,
+			);
+			name = Converter;
 			sourceTree = "<group>";
 		};
 		45EE78521A729DD5001CA0C5 /* Special Version */ = {
@@ -347,6 +360,7 @@
 				2386A1D01A4080830011785B /* SecondVC.m in Sources */,
 				2372AC051A5DDB97002C06F7 /* StartViewController.m in Sources */,
 				2386A19E1A3724000011785B /* AppDelegate.m in Sources */,
+				450659A01ABEAE3400940810 /* thumbGenerator.m in Sources */,
 				2386A19B1A3724000011785B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
