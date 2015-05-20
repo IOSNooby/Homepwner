@@ -10,15 +10,36 @@
 
 @implementation superCellClass
 
+
+#pragma mark Life Cycle
+
+
+
+- (IBAction)clickThumb:(id)sender {
+    // call back  ^{} block
+    // Tableview implemented these block
+    if(self.thumbImgblock){
+        self.thumbImgblock();
+    }
+    
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }
+
+#pragma mark Helper Life Cycle 
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
+
+
+
+#pragma mark Cancel Default elements
 
 -(UILabel*) textLabel{
     return nil;
@@ -31,10 +52,19 @@
     return nil;
 }
 
+
+/// Use ThumbGenerator.h instead 
+/*
+
+#pragma mark Thumbnail 
+
 -(void) setThumbnailFromImage:(UIImage*) imageOriginal{
     
     CGSize originalSize = imageOriginal.size;
-    CGRect thumbRect = CGRectMake(0, 0, 40, 40);
+    
+    CGFloat thumbsize = self.ThumbSizeNumber.intValue;
+    
+    CGRect thumbRect = CGRectMake(0, 0, thumbsize, thumbsize);
     float ratio = MAX(thumbRect.size.width / originalSize.width,
                       thumbRect.size.height / originalSize.height);
     
@@ -55,6 +85,7 @@
     self.imageThumb.image = smallImage;
     
 }
-
+*/
+/// Use ThumbGenerator.h instead
 
 @end

@@ -10,9 +10,6 @@
 
 @interface INWitem()
 
-@property (strong,nonatomic) NSArray* nameList;
-@property (strong,nonatomic) NSArray* serialNumList;
-
 @property (strong,nonatomic) NSString* myUUID;
 
 @end
@@ -37,24 +34,36 @@
         _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
         _valueInDollars = [aDecoder decodeObjectForKey:@"valueInDollars"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
-        _myUUID = [aDecoder decodeObjectForKey:@"myUUID"];
         
+        _myUUID = [aDecoder decodeObjectForKey:@"myUUID"];
+
         _hasImage = [aDecoder decodeBoolForKey:@"hasImage"];
+        
+        /*
+        NSData * thumbData = [aDecoder decodeObjectForKey:@"thumb"];
+        
+        id x =[NSKeyedUnarchiver unarchiveObjectWithData:thumbData];
+        if([x isKindOfClass:[UIImage class]]){
+            _thumb = x;
+        } */
+        
+        _thumb = [aDecoder decodeObjectForKey:@"thumb"];
+    
     }
     return self;
 }
 
 
 
-+(NSArray*) nameList{
+/*+(NSArray*) nameList{
     return   @[@"John",@"Sven",@"Mirana",@"Butcher",@"Lois"
                ,@"Ommy",@"Cammy",@"Sagat",@"Juri"];;
 }  
 
-+(NSArray*) serialNumList{
+//+(NSArray*) serialNumList{
     return @[@"111",@"222",@"333",@"444",@"555",@"666",@"777",@"888"];
 }
-
+*/
 
 +(INWitem*) createBlankItem{
     INWitem* item = [[INWitem alloc]init];
@@ -80,12 +89,15 @@
     
     [aCoder encodeBool:self.hasImage forKey:@"hasImage"];
     
+    [aCoder encodeObject:self.thumb forKey:@"thumb"];
+    /*
+    NSData*  thumbData = [NSKeyedArchiver archivedDataWithRootObject:self.thumb];
+    [aCoder encodeObject:thumbData forKey:@"thumb"];
+    */
 }
 
-
-
 #pragma mark Unused (Oldversion)
-
+/*
 +(INWitem*) randomItem{
     
     INWitem * item = [[INWitem alloc]init];
@@ -104,7 +116,6 @@
     return item ;
 }
 
-
-
+*/
 
 @end

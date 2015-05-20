@@ -7,6 +7,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondVC">
             <connections>
                 <outlet property="Date" destination="hsd-sB-qPm" id="Rln-qg-zYw"/>
+                <outlet property="NameUILabel" destination="nbI-s1-NaP" id="FVj-mR-Bcc"/>
+                <outlet property="SerialUILabel" destination="Dld-RH-liJ" id="1Je-j0-P7E"/>
+                <outlet property="ValueUILabel" destination="ZI3-0Q-9Ru" id="vi1-OE-slu"/>
                 <outlet property="cameraButton" destination="y9G-wL-3He" id="rvC-LR-mIN"/>
                 <outlet property="imgView" destination="g4Q-yR-519" id="iWF-CW-NjU"/>
                 <outlet property="myview" destination="JnU-3d-vcc" id="E5e-gc-mbz"/>

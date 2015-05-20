@@ -43,6 +43,25 @@
                             <rect key="frame" x="162" y="12" width="97" height="25"/>
                         </variation>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJl-aV-B1l">
+                        <rect key="frame" x="0.0" y="0.0" width="108" height="50"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="clickThumb:" destination="xjH-B3-zuo" eventType="touchUpInside" id="yWC-Gw-jEk"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="108" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="ceR-9m-GND">
+                        <rect key="frame" x="0.0" y="0.0" width="108" height="50"/>
+                        <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="2h1-r4-Wr7"/>
+                        </constraints>
+                        <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
+                            <rect key="frame" x="0.0" y="1" width="108" height="50"/>
+                        </variation>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="21" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9t-0s-BRI">
                         <rect key="frame" x="116" y="8" width="42" height="21"/>
                         <constraints>
@@ -55,16 +74,6 @@
                             <rect key="frame" x="116" y="9" width="42" height="21"/>
                         </variation>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="240" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" placeholderIntrinsicWidth="108" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="ceR-9m-GND">
-                        <rect key="frame" x="0.0" y="0.0" width="108" height="50"/>
-                        <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="2h1-r4-Wr7"/>
-                        </constraints>
-                        <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
-                            <rect key="frame" x="0.0" y="1" width="108" height="50"/>
-                        </variation>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Mir-Xf-pUP" firstAttribute="leading" secondItem="PPm-2G-VZy" secondAttribute="trailing" constant="5" id="21q-3y-pdN">
@@ -78,6 +87,7 @@
                     <constraint firstItem="S9Z-5o-h0Z" firstAttribute="bottom" secondItem="PPm-2G-VZy" secondAttribute="bottom" constant="7" id="Ehi-Ka-vNt">
                         <variation key="heightClass=regular" constant="8"/>
                     </constraint>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="width" secondItem="ZJl-aV-B1l" secondAttribute="width" id="If2-ID-ZDg"/>
                     <constraint firstItem="ceR-9m-GND" firstAttribute="top" secondItem="6nm-s2-Tir" secondAttribute="topMargin" constant="-8" id="M6b-iL-dXZ">
                         <variation key="heightClass=regular" constant="-9"/>
                     </constraint>
@@ -90,15 +100,20 @@
                     <constraint firstItem="ceR-9m-GND" firstAttribute="leading" secondItem="6nm-s2-Tir" secondAttribute="leadingMargin" constant="-8" id="d9O-HB-fpW">
                         <variation key="heightClass=regular" constant="0.0"/>
                     </constraint>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="trailing" secondItem="ZJl-aV-B1l" secondAttribute="trailing" id="hHi-0z-Ggj"/>
                     <constraint firstItem="PPm-2G-VZy" firstAttribute="leading" secondItem="f9t-0s-BRI" secondAttribute="trailing" constant="4" id="jCU-CA-02k">
                         <variation key="heightClass=regular" constant="8"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="Mir-Xf-pUP" secondAttribute="trailing" constant="5" id="mPH-0h-JkF">
                         <variation key="heightClass=regular" constant="0.0"/>
                     </constraint>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="bottom" secondItem="ZJl-aV-B1l" secondAttribute="bottom" id="nhx-o0-3tB"/>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="top" secondItem="ZJl-aV-B1l" secondAttribute="top" id="oWP-sE-2av"/>
                     <constraint firstItem="S9Z-5o-h0Z" firstAttribute="top" secondItem="6nm-s2-Tir" secondAttribute="topMargin" constant="14" id="r4e-EA-sBb">
                         <variation key="heightClass=regular" constant="16"/>
                     </constraint>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="height" secondItem="ZJl-aV-B1l" secondAttribute="height" id="wHE-vW-voN"/>
+                    <constraint firstItem="ceR-9m-GND" firstAttribute="leading" secondItem="ZJl-aV-B1l" secondAttribute="leading" id="wPY-1m-MJY"/>
                 </constraints>
                 <variation key="heightClass=regular">
                     <mask key="constraints">
@@ -108,13 +123,15 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="LookImg" destination="ZJl-aV-B1l" id="6KQ-tV-9fu"/>
                 <outlet property="Name" destination="f9t-0s-BRI" id="9do-fI-0wF"/>
                 <outlet property="imageThumb" destination="ceR-9m-GND" id="6OF-aI-zqy"/>
                 <outlet property="serial" destination="S9Z-5o-h0Z" id="M87-eI-nY4"/>
                 <outlet property="value" destination="Mir-Xf-pUP" id="uWI-XV-4cc"/>
             </connections>
-            <point key="canvasLocation" x="423.5" y="94"/>
+            <point key="canvasLocation" x="423" y="88"/>
         </tableViewCell>
     </objects>
 </document>

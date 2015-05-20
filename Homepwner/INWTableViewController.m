@@ -9,13 +9,17 @@
 #import "INWTableViewController.h"
 #import "INWItemStore.h"
 #import "INWitem.h"
+
+#import "INWSmallMenuVC.h"
 #import "SecondVC.h"
 
 #import "neoCell.h"
 #import "superCellClass.h"
 
 #import "ImageStore.h"
-#import "thumbStore.h"
+#import "QuickPreviewVC.h"
+
+static NSDictionary* cellH;
 
 @interface INWTableViewController ()
 
@@ -23,6 +27,21 @@
 
 @property (nonatomic,strong) IBOutlet UIView* headerView;
 
+@property(strong,nonatomic) UIPopoverController* popOver;
+
+@property(strong,nonatomic) UIPopoverController* miniPopover;
+
+@property (weak, nonatomic) IBOutlet UIButton *optionButton;
+
+#pragma mark DynamicType Properties
+// some of them has Lazy inits
+@property (nonatomic) CGFloat dynamicRowH;
+
+@property (nonatomic) CGFloat defaultRowH;
+
+@property (nonatomic) CGFloat dynamicCellFontSize;
+
+@property (strong,nonatomic) NSString* currentPreferredContentSize;
 
 @end
 
@@ -70,6 +89,66 @@
     }
     
 }
+
+
+- (IBAction)Config:(id)sender {
+    
+    /// Show Popup
+    /// inside Popup , there you could see a list of commands
+    /// if you choose "Clear Disk"
+    /// Every single Item removed
+    /// Also , every single things in Persistent too
+    
+    INWSmallMenuVC* smallMenus = [INWSmallMenuVC singletonMenu];
+    
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad){
+    
+        UIPopoverController* pop = [[UIPopoverController alloc]initWithContentViewController:smallMenus];
+        
+        pop.popoverContentSize  =  CGSizeMake(100, 100);
+        self.miniPopover =  pop;
+    
+        pop.delegate = self;
+        
+        
+        CGRect whereArrowBe =
+        [self.view  convertRect:self.optionButton.frame toView:self.view];
+        
+        [pop presentPopoverFromRect:whereArrowBe
+                             inView:self.view
+           permittedArrowDirections:UIPopoverArrowDirectionUp
+                           animated:YES];
+    }
+    
+    else{
+        /*
+        self.modalPresentationStyle = UIModalPresentationFormSheet;
+        smallMenus.modalPresentationStyle = UIModalPresentationFormSheet;
+        */
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Menu"
+                     message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ClearDisk = [UIAlertAction actionWithTitle:@"Clear Disk"
+                                    style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                                           /// do something
+                                        
+                                           /// clear the Persistent & clear the ItemStore
+                                           /// tell user its Done or not
+                                        
+                                    }];
+        
+        UIAlertAction* Cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                                           /// Cancel it
+                                    }];
+        
+        
+        [alert addAction: ClearDisk];
+        [alert addAction:Cancel];
+        [self presentViewController: alert animated:YES completion:nil];
+    }
+}
+
 #pragma mark Class Initializers
 
 // this is Designate initializer
@@ -79,16 +158,34 @@
     }
 
 -(instancetype) init{
-    return [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewStylePlain];
+    if(self){
+        
+        self.defaultRowH = 50 ;
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self
+                    selector:@selector(dynamicTypeUpdateFont:)
+                    name:UIContentSizeCategoryDidChangeNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self
+                          selector:@selector(newFontSizeToCellHeight)
+                          name:UIContentSizeCategoryDidChangeNotification object:nil];
+    }
+    
+    return  self;
 }
 
+
+-(void) dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+             name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
 
 //  Force every init method to return just 1 type (StylePlain)
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     /// this code Define Cell's soul (Prepare Cell's class) and add Identifier.
     /// You can modify the CELL to CustomCellClass by coding
     
@@ -135,6 +232,15 @@
     _store = store;
 }
 
+
+-(NSString*) currentPreferredContentSize{
+    // to avoid nil pointer app Crash
+    if(!_currentPreferredContentSize){
+        _currentPreferredContentSize = UIContentSizeCategoryLarge;
+    }
+    return _currentPreferredContentSize;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -151,6 +257,20 @@
 
 
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+    if(self.dynamicRowH){
+        
+        NSLog(@"DYnaroW = %f",self.dynamicRowH);
+
+        return self.dynamicRowH;
+    }
+    else{
+        return self.defaultRowH;
+    }
+    
+}
+
 
 
 #pragma mark Cell Modifications 
@@ -158,67 +278,111 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /// make test CustomCell using Xib
-    
-    // ---* this Code Work !!!*-----
-    
-    /*NSArray* n = [[NSBundle mainBundle]loadNibNamed:@"newCell" owner:self options:nil];
-
-    newCellTableViewCell* cell  = [n firstObject];
-    */
-    /// testing
     
     UITableViewCell* cellOut;
     
     if(indexPath.row < [[[INWItemStore sharedStore]allItems]count]){
-        superCellClass * cell = [tableView dequeueReusableCellWithIdentifier:@"SuperCellX" forIndexPath:indexPath];
+        superCellClass * cell = [tableView dequeueReusableCellWithIdentifier:@"SuperCellX"
+                                                                forIndexPath:indexPath];
 
         INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
-       
+      
         cell.Name.text = item.itemName;
         cell.serial.text = item.serialNumber;
+        cell.value.text = [NSString  stringWithFormat:@"$%@",item.valueInDollars] ;
+        // DynamicType for UI texts
         
-        cell.value.text = [NSString  stringWithFormat:@"$%@",item.valueInDollars ] ;
+        cell.ThumbSizeNumber = cellH[self.currentPreferredContentSize];
+        
+       // cell.ThumbSizeValue =
+        UIFont* fontchange = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        
+        NSLog(@"CurrentPrefContent = %@",self.currentPreferredContentSize);
+        NSLog(@"UIFONT = %@",fontchange);
+
+        cell.Name.font = fontchange;
+        cell.serial.font = fontchange;
+        cell.value.font = fontchange;
         
         UIColor* colorForPrice;
         
         if(item.valueInDollars.integerValue > 99){
               colorForPrice = [UIColor redColor];
-        }
-        else {colorForPrice = [UIColor greenColor];
-        }
-
+        }else {colorForPrice = [UIColor greenColor];}
+        
         cell.value.textColor = colorForPrice;
+        cell.imageThumb.image = item.thumb ;
         
-        // fetch from dictionary (shallow store)
-         UIImage* img = [[thumbStore sharedStore] loadFromPersistentByKey:item.myUUID];
-         [[thumbStore sharedStore]addImageToDic:img WithKey:item.myUUID];
+        // premature optimize
+        // cell.thumbImgblock = [self returnBlockforImagethumbQuickview];
         
-        cell.imageThumb.image =  [[thumbStore sharedStore]imageDic][item.myUUID] ;
+        __weak UIImageView* weakThumb = cell.imageThumb;
         
-        NSLog(@"IMG THUMB = %@",cell.imageThumb);
-
+        
+        cell.thumbImgblock = ^{
+           
+          // ** this code allow "Quick View" for iPad Mode **
+            
+          // call ImageStore , get Image via UUID of current cell item
+          // create new QuickPreviewVC , set its image to Image you got
+          // now , create POPOver (using QuickPreviewVC as content)
+             // set POPOver  contentsize ,delegate , and Present it
+            if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad){
+                
+                // got a chunck of Image and force it to VC
+                UIImage* rawImageFromStore = [[ImageStore singletonImageStore]getImageFromKey:item.myUUID];
+                UIImageView* rawimgview = [[UIImageView alloc]initWithImage:rawImageFromStore];
+                QuickPreviewVC* quickVC = [[QuickPreviewVC alloc]init];
+              //  quickVC.bigImage = rawImageFromStore;
+                
+                UIScrollView* scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 600, 600)];
+                
+                scrollView.contentSize = rawImageFromStore.size;
+                scrollView.delegate = self;
+                scrollView.maximumZoomScale = 2.0;
+                scrollView.minimumZoomScale = 1.0;
+                [scrollView addSubview:rawimgview];
+                quickVC.view = scrollView;
+                
+                // prepare ingradient for Popover cooking  (where the arrow begin)
+                CGRect thumbPositionRealtiveToBigView = [self.view convertRect:weakThumb.bounds
+                                                                  fromView:weakThumb];
+                
+                // Popover alloc / init and settings , size , delegate
+                UIPopoverController* poppy = [[UIPopoverController alloc]
+                                              initWithContentViewController:quickVC];
+                poppy.backgroundColor = [UIColor blackColor];
+                self.popOver = poppy;
+                self.popOver.delegate = self;
+                self.popOver.popoverContentSize = CGSizeMake(600, 600);
+                [self.popOver presentPopoverFromRect:thumbPositionRealtiveToBigView
+                                              inView:self.view
+                            permittedArrowDirections:UIPopoverArrowDirectionAny
+                                            animated:YES];
+           }
+        };
+        
         cellOut = cell;
+    
     }
     else if(indexPath.row == [[[INWItemStore sharedStore] allItems]count]){
-        neoCell* neoCell = [tableView dequeueReusableCellWithIdentifier:@"neoCellX" forIndexPath:indexPath];
+        neoCell* neoCell = [tableView dequeueReusableCellWithIdentifier:@"neoCellX"
+                                                           forIndexPath:indexPath];
         // name the last View cell appearance
         neoCell.myLabel.text = @"...";
         cellOut = neoCell;
     }
     
     return cellOut;
-    
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 60;
+-(void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    self.popOver = nil;
 }
+
 
 
 #pragma mark Edit / Add
-
 
 -(void) tableView:(UITableView *)tableView
              commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -230,6 +394,7 @@
         
             INWitem* item = [[INWItemStore sharedStore]allItems][indexPath.row];
             [[INWItemStore sharedStore] removeItem:item];
+            
             [tableView deleteRowsAtIndexPaths:@[indexPath]
                              withRowAnimation:UITableViewRowAnimationFade];
       }
@@ -260,7 +425,7 @@
     NSString * toreturn;
     
     if(indexPath.row < [[[INWItemStore sharedStore]allItems] count]){
-        toreturn  = @"Remove YO!";
+        toreturn  = @"Remove";
     }
     else{
         toreturn  = @"          ";
@@ -314,6 +479,41 @@
 // This method run inside both Navigation's SystemButton "Add"
 // and also Xib custom Header "add" button
 
+
+-(void) newFontSizeToCellHeight{
+    // Dynamictype
+    //  create the Set of current H
+    
+    if(!cellH){
+        cellH =  @{ UIContentSizeCategoryExtraSmall : @50,
+                    UIContentSizeCategorySmall : @55,
+                    UIContentSizeCategoryMedium : @60,
+                    UIContentSizeCategoryLarge : @65,
+                    UIContentSizeCategoryExtraLarge :@70,
+                    UIContentSizeCategoryExtraExtraLarge :@75,
+                    UIContentSizeCategoryExtraExtraExtraLarge : @80,
+                    // this size activated only when you enable "More size please" in iOS settings
+                    UIContentSizeCategoryAccessibilityMedium:@88,
+                    UIContentSizeCategoryAccessibilityLarge :@99,
+                    UIContentSizeCategoryAccessibilityExtraLarge :@100,
+                    UIContentSizeCategoryAccessibilityExtraExtraLarge :@110,
+                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge :@120
+                  };
+    }
+    
+    // We cant predict what size user will choose ,
+    //  so ASK preferredContentSizeCategory from Application
+    NSString * UIContentSizeCategoryString = [[UIApplication sharedApplication] preferredContentSizeCategory];
+    // got size name user chosen , and bring the name to fetch value from Dictionary
+    NSNumber* cellHeightValue =  cellH[UIContentSizeCategoryString];
+    self.dynamicRowH =  cellHeightValue.floatValue;
+    self.dynamicCellFontSize = cellHeightValue.floatValue;
+    self.currentPreferredContentSize = UIContentSizeCategoryString;
+}
+
+
+
+
 -(void) addNewItem_Helper{
    
     INWitem* new = [[INWItemStore sharedStore]createINWItem];
@@ -350,10 +550,22 @@
         
         return text;
     }
-    
     return nil;
 }
 
+-(void(^)(void)) returnBlockforImagethumbQuickview{
+    return ^{                    };
+}
+
+#pragma mark DynamicType
+
+-(void) dynamicTypeUpdateFont:(NSNotification*) noti{
+    UIFont* newfont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    NSArray* subviews = self.headerView.subviews;
+    for(UILabel* label in subviews){
+        label.font = newfont;
+    }
+}
 
 #pragma mark Unused Methods (Old versions)
 

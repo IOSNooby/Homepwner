@@ -10,4 +10,6 @@
 
 @interface StartViewController : ViewController
 
+-(void) dynamicTypeUpdateFont;
+
 @end

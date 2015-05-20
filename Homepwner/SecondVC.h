@@ -17,6 +17,6 @@
 
 -(instancetype) initWithNewItem:(BOOL)isNew;
 
-
+  
 
 @end

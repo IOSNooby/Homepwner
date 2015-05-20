@@ -98,8 +98,11 @@
                  WithKey : (NSString*)uuid{
     
     NSData* imgData = UIImagePNGRepresentation(image);
+    NSLog(@"SavetoPersistent :Generate PNG = %@",imgData);
+
     [imgData writeToURL:[self generateURLForParticularImage:uuid]
              atomically:YES];
+    
 }
 
 -(UIImage*) loadFromPersistentByKey : (NSString*) uuid{
@@ -107,8 +110,10 @@
     NSURL* place = [self generateURLForParticularImage:uuid];
     NSData* aData = [NSData dataWithContentsOfURL:place];
    id unknow  =  [NSKeyedUnarchiver unarchiveObjectWithData:aData];
-    if([unknow isKindOfClass:[UIImage class]]){
+    if(unknow){
+      if([unknow isKindOfClass:[UIImage class]]){
          image = unknow;
+     }
     }
     return image;
 }
@@ -121,8 +126,21 @@
                        inDomain:NSUserDomainMask appropriateForURL:nil
                               create:YES error:nil];
     NSURL* placeForThumb = [original URLByAppendingPathComponent:@"thumbStore"];
+    
     return placeForThumb;
 
+}
+
+
+-(void) createEmptyFolderForThumbstoreWhenAppInstalled{
+    
+    // this should call only once per application installation
+    NSFileManager* manager  = [NSFileManager defaultManager];
+    if(![manager fileExistsAtPath: [self defaultSaveURL].path]){
+        [manager createDirectoryAtURL:[self defaultSaveURL]
+                    withIntermediateDirectories:YES
+                                     attributes:nil error:nil];
+    }
 }
 
 #pragma mark Helper Methods  (Private)
@@ -156,5 +174,7 @@
     };
     
 }
+#pragma mark DEBUG
+
 
 @end

@@ -111,8 +111,13 @@
     }
     //
     [self.imageStoreDic removeObjectForKey:nameKey];
+    
     NSMutableDictionary* persistentDic = [self summonPersistentDicData];
+    
     [persistentDic removeObjectForKey:nameKey];
+    
+    NSLog(@"(DEBUG) Does Deletion WORK ?  = %lu",(unsigned long)[persistentDic count]);
+
     [self writeToPersistentLocation:persistentDic];
     
 }
@@ -141,9 +146,7 @@
         NSData* aData = [NSKeyedArchiver archivedDataWithRootObject:image];
         [secondaryDic setObject:aData forKey:key];
         
-      
-        
-    }
+      }
     }
     
     NSMutableDictionary* persistentDic = [self summonPersistentDicData];
@@ -213,7 +216,6 @@
     
     //NSLog(@"ANY IS CLASS %@",NSStringFromClass(any));
     
-    
     if([any isKindOfClass:[NSMutableDictionary class]]){
         NSLog(@" Hybernated Persistent is NSMutableDictionary class type");
          allImageDataDic = any;
@@ -252,14 +254,13 @@
 
     [self.imageStoreDic removeAllObjects];
     NSNotificationCenter* a = [NSNotificationCenter defaultCenter];
-    [a removeObserver:self name:nil object:nil];
+    [a removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 }
 
 #pragma mark SolveBug Method (Update version 0.01)
 
 // this version solve bug "Persistent Never save any dictionary so we got a NIL and Appcrash"
 // solve by creating Empty dictionary and saved it to persistent , so the App has some Dic to do his job
-
 
 -(void) whenPersistentNeverCreateDicbeforeMakeOne: (id) unknowtypeFileFetchFromHDD{
     // this method should be called only once since app installed to iPhones

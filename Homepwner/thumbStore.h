@@ -35,4 +35,11 @@
 -(UIImage*) loadFromPersistentByKey : (NSString*) uuid;
 
 
+#pragma mark special methods
+
+-(void) createEmptyFolderForThumbstoreWhenAppInstalled;
+
+#pragma mark DEBUGGING
+
+
 @end

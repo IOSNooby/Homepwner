@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartViewController">
             <connections>
+                <outlet property="StartButton" destination="iwt-RG-ohH" id="qds-Cb-hl4"/>
                 <outlet property="TitleBig" destination="Mhm-zf-ED0" id="cFr-la-0kZ"/>
                 <outlet property="viewScreen" destination="hKb-4v-3eF" id="HgI-my-Vok"/>
             </connections>
@@ -41,7 +42,7 @@
                 <constraint firstAttribute="centerX" secondItem="Mhm-zf-ED0" secondAttribute="centerX" id="ynk-BH-PJd"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="357" y="359"/>
+            <point key="canvasLocation" x="358" y="349"/>
         </view>
     </objects>
 </document>

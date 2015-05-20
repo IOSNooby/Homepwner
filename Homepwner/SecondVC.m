@@ -12,7 +12,6 @@
 #import "ImageStore.h"
 
 #import "thumbGenerator.h"
-#import "thumbStore.h"
 
 @interface SecondVC () <UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIPopoverControllerDelegate>
 
@@ -34,6 +33,14 @@
 @property (strong,nonatomic) UIImagePickerController* imgPicker;
 
 
+
+
+#pragma mark add DynamicType to UI
+
+@property (weak, nonatomic) IBOutlet UILabel *NameUILabel;
+@property (weak, nonatomic) IBOutlet UILabel *SerialUILabel;
+@property (weak, nonatomic) IBOutlet UILabel *ValueUILabel;
+
 @end
 
 @implementation SecondVC
@@ -51,9 +58,7 @@
 -(UIImagePickerController*) imgPicker{
     
     if(!_imgPicker){
-        
         _imgPicker= [[UIImagePickerController alloc]init];
-        
         
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
             // Device has Camera
@@ -138,20 +143,32 @@
 -(instancetype) initWithNewItem:(BOOL)isNew{
     self = [super initWithNibName:nil bundle:nil];
     if(self){
-         self.item = [INWitem createBlankItem];
+        
+        self.item = [INWitem createBlankItem];
         
         if(isNew){
-            
             [self prepareMiniNavigationForCenterModal];
         }
         // else , return old
-        
+        [self helpPrepareNotificationForDynamictype];
+
     }
     return self;
 }
+ #pragma mark Init Helper
 
+-(void) helpPrepareNotificationForDynamictype{
+    
+    NSNotificationCenter* cen = [NSNotificationCenter defaultCenter];
+    [cen addObserver:self
+            selector:@selector(Updatefont)
+                name:UIContentSizeCategoryDidChangeNotification
+              object:nil];
+}
 
 #pragma mark VC Life Cycle
+
+
 
 -(void) viewDidLoad{
     
@@ -317,9 +334,7 @@
     // Add Generate small image from big image
     // store small image with UUID of current item
     UIImage* thumbnailImg = [thumbGenerator bigImageToThumbnail:self.imgView.image];
-    [[thumbStore sharedStore]addImageToDic:thumbnailImg WithKey:self.item.myUUID];
-    [[thumbStore sharedStore]saveToPersistent:thumbnailImg WithKey:self.item.myUUID];
-    
+    self.item.thumb = thumbnailImg;
 }
 
 #pragma mark UIPopover Delegate
@@ -455,9 +470,11 @@
 
 -(void) dismissAllViewFromResponder{
     
-    NSArray* everyview = [self.myview subviews];
-    for(UITextField* a in everyview){
-        [a resignFirstResponder];
+    if(![self.myview isFirstResponder]){
+        NSArray* everyview = [self.myview subviews];
+            for(UITextField* a in everyview){
+                [a resignFirstResponder];
+        }
     }
 }
 
@@ -487,7 +504,27 @@
         }
     }
 }
+#pragma mark DynamicType
 
+-(void) Updatefont{
+    
+    UIFont * newfont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    NSLog(@"does font change ");
 
+    // field
+    self.namdField.font = newfont;
+    self.serialField.font = newfont;
+    self.valueField.font = newfont;
+    self.Date.font = newfont;
+    // Text
+    self.NameUILabel.font = newfont;
+    self.SerialUILabel.font = newfont;
+    self.ValueUILabel.font = newfont;
+}
+
+-(void) dealloc{
+     [[NSNotificationCenter defaultCenter] removeObserver:self
+       name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
 
 @end

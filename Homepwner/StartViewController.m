@@ -14,11 +14,35 @@
 
 @property (strong, nonatomic) IBOutlet UIView *viewScreen;
 
+@property (weak, nonatomic) IBOutlet UIButton *StartButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *TitleBig;
 
 @end
 
 @implementation StartViewController
+
+-(instancetype) init{
+    self = [super init];
+    if(self){
+        NSNotificationCenter* cen = [NSNotificationCenter defaultCenter];
+        [cen addObserver:self
+                selector:@selector(dynamicTypeUpdateFont)
+                    name:UIContentSizeCategoryDidChangeNotification
+                  object:nil];
+    }
+    return self;
+}
+
+
+-(void) dynamicTypeUpdateFont{
+    UIFont* newest = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.TitleBig.font = newest;
+    self.StartButton.titleLabel.font= newest;
+}
+
+
+
 
 -(UIView*) viewScreen{
     if(!_viewScreen){
@@ -47,7 +71,10 @@
     
 }
 
-
+-(void) dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+      name:UIContentSizeCategoryDidChangeNotification object:nil];
+}
 
 
 @end

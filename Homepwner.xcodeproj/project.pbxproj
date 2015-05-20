@@ -25,11 +25,17 @@
 		2386A1D21A408C100011785B /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2386A1D11A408C100011785B /* SecondView.xib */; };
 		4506599D1AB89A7000940810 /* thumbStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4506599C1AB89A7000940810 /* thumbStore.m */; };
 		450659A01ABEAE3400940810 /* thumbGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4506599F1ABEAE3400940810 /* thumbGenerator.m */; };
+		4559AD7B1AEF2D00006AC3BE /* INWSmallMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4559AD7A1AEF2D00006AC3BE /* INWSmallMenuVC.m */; };
+		4559AD7D1AEF2F42006AC3BE /* SmallMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4559AD7C1AEF2F42006AC3BE /* SmallMenu.xib */; };
+		45C6D2F61B0A0888004B3BCF /* myTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D2F51B0A0888004B3BCF /* myTransformer.m */; };
+		45C6D2FD1B0B6658004B3BCF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D2FB1B0B6658004B3BCF /* Model.xcdatamodeld */; };
+		45C6D3001B0C6BC1004B3BCF /* INWItemX.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D2FF1B0C6BC1004B3BCF /* INWItemX.m */; };
 		45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45D75F191AB59A390071FA28 /* superCell.xib */; };
 		45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D75F1C1AB59A9F0071FA28 /* superCellClass.m */; };
 		45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45DC698E1A727AA60028231F /* InsaneTools.xib */; };
 		45E7D31B1A73FE6100F16E5F /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E7D31A1A73FE6100F16E5F /* ImageStore.m */; };
 		45EE78511A729DBD001CA0C5 /* InsaneToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 45EE78501A729DBD001CA0C5 /* InsaneToolVC.m */; };
+		45F110651ACADF490025B3EE /* QuickPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F110641ACADF490025B3EE /* QuickPreviewVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -85,6 +91,14 @@
 		4506599C1AB89A7000940810 /* thumbStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thumbStore.m; sourceTree = "<group>"; };
 		4506599E1ABEAE3400940810 /* thumbGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thumbGenerator.h; sourceTree = "<group>"; };
 		4506599F1ABEAE3400940810 /* thumbGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = thumbGenerator.m; sourceTree = "<group>"; };
+		4559AD791AEF2D00006AC3BE /* INWSmallMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWSmallMenuVC.h; sourceTree = "<group>"; };
+		4559AD7A1AEF2D00006AC3BE /* INWSmallMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWSmallMenuVC.m; sourceTree = "<group>"; };
+		4559AD7C1AEF2F42006AC3BE /* SmallMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmallMenu.xib; sourceTree = "<group>"; };
+		45C6D2F41B0A0888004B3BCF /* myTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myTransformer.h; sourceTree = "<group>"; };
+		45C6D2F51B0A0888004B3BCF /* myTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myTransformer.m; sourceTree = "<group>"; };
+		45C6D2FC1B0B6658004B3BCF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		45C6D2FE1B0C6BC1004B3BCF /* INWItemX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWItemX.h; sourceTree = "<group>"; };
+		45C6D2FF1B0C6BC1004B3BCF /* INWItemX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWItemX.m; sourceTree = "<group>"; };
 		45D75F171AB49EA90071FA28 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F181AB49EA90071FA28 /* HomepwnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomepwnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D75F191AB59A390071FA28 /* superCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = superCell.xib; sourceTree = "<group>"; };
@@ -95,6 +109,8 @@
 		45E7D31A1A73FE6100F16E5F /* ImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		45EE784F1A729DBD001CA0C5 /* InsaneToolVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsaneToolVC.h; sourceTree = "<group>"; };
 		45EE78501A729DBD001CA0C5 /* InsaneToolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsaneToolVC.m; sourceTree = "<group>"; };
+		45F110631ACADF490025B3EE /* QuickPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickPreviewVC.h; sourceTree = "<group>"; };
+		45F110641ACADF490025B3EE /* QuickPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickPreviewVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +138,7 @@
 				45D75F191AB59A390071FA28 /* superCell.xib */,
 				2372AC011A5DD9E1002C06F7 /* StartScreen.xib */,
 				2386A1D11A408C100011785B /* SecondView.xib */,
+				4559AD7C1AEF2F42006AC3BE /* SmallMenu.xib */,
 				2386A1CC1A3AF5300011785B /* HeaderView.xib */,
 				2386A1A71A3724000011785B /* LaunchScreen.xib */,
 			);
@@ -142,6 +159,7 @@
 		2386A18C1A3724000011785B = {
 			isa = PBXGroup;
 			children = (
+				45A4709B1AC79ECF001FFA41 /* Unused */,
 				45EE78521A729DD5001CA0C5 /* Special Version */,
 				2386A1971A3724000011785B /* Homepwner */,
 				2386A1B11A3724000011785B /* HomepwnerTests */,
@@ -155,6 +173,8 @@
 			children = (
 				2386A19C1A3724000011785B /* AppDelegate.h */,
 				2386A19D1A3724000011785B /* AppDelegate.m */,
+				45C6D2F71B0B4953004B3BCF /* CoreData */,
+				45F110661ACB46040025B3EE /* Modal VC */,
 				450659A11ABEAE4500940810 /* Converter */,
 				2386A1C71A3A40B10011785B /* Model */,
 				2386A1C81A3A40D20011785B /* Controller */,
@@ -203,8 +223,6 @@
 				2386A1C51A383BF80011785B /* INWItemStore.m */,
 				45E7D3191A73FE6100F16E5F /* ImageStore.h */,
 				45E7D31A1A73FE6100F16E5F /* ImageStore.m */,
-				4506599B1AB89A7000940810 /* thumbStore.h */,
-				4506599C1AB89A7000940810 /* thumbStore.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -216,6 +234,8 @@
 				2372AC041A5DDB97002C06F7 /* StartViewController.m */,
 				2386A1BE1A3757D80011785B /* INWTableViewController.h */,
 				2386A1BF1A3757D80011785B /* INWTableViewController.m */,
+				4559AD791AEF2D00006AC3BE /* INWSmallMenuVC.h */,
+				4559AD7A1AEF2D00006AC3BE /* INWSmallMenuVC.m */,
 				2386A1CE1A4080830011785B /* SecondVC.h */,
 				2386A1CF1A4080830011785B /* SecondVC.m */,
 			);
@@ -231,6 +251,28 @@
 			name = Converter;
 			sourceTree = "<group>";
 		};
+		45A4709B1AC79ECF001FFA41 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				4506599B1AB89A7000940810 /* thumbStore.h */,
+				4506599C1AB89A7000940810 /* thumbStore.m */,
+			);
+			name = Unused;
+			path = Homepwner;
+			sourceTree = "<group>";
+		};
+		45C6D2F71B0B4953004B3BCF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				45C6D2FB1B0B6658004B3BCF /* Model.xcdatamodeld */,
+				45C6D2FE1B0C6BC1004B3BCF /* INWItemX.h */,
+				45C6D2FF1B0C6BC1004B3BCF /* INWItemX.m */,
+				45C6D2F41B0A0888004B3BCF /* myTransformer.h */,
+				45C6D2F51B0A0888004B3BCF /* myTransformer.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		45EE78521A729DD5001CA0C5 /* Special Version */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +282,15 @@
 			);
 			name = "Special Version";
 			path = Homepwner;
+			sourceTree = "<group>";
+		};
+		45F110661ACB46040025B3EE /* Modal VC */ = {
+			isa = PBXGroup;
+			children = (
+				45F110631ACADF490025B3EE /* QuickPreviewVC.h */,
+				45F110641ACADF490025B3EE /* QuickPreviewVC.m */,
+			);
+			name = "Modal VC";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +377,7 @@
 				2386A1CD1A3AF5300011785B /* HeaderView.xib in Resources */,
 				2386A1A91A3724000011785B /* LaunchScreen.xib in Resources */,
 				2386A1D21A408C100011785B /* SecondView.xib in Resources */,
+				4559AD7D1AEF2F42006AC3BE /* SmallMenu.xib in Resources */,
 				236BED0F1A61DDC2007020C7 /* neoCell.xib in Resources */,
 				45DC698F1A727AA60028231F /* InsaneTools.xib in Resources */,
 				45D75F1A1AB59A390071FA28 /* superCell.xib in Resources */,
@@ -348,14 +400,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4559AD7B1AEF2D00006AC3BE /* INWSmallMenuVC.m in Sources */,
 				45E7D31B1A73FE6100F16E5F /* ImageStore.m in Sources */,
 				45EE78511A729DBD001CA0C5 /* InsaneToolVC.m in Sources */,
+				45C6D3001B0C6BC1004B3BCF /* INWItemX.m in Sources */,
 				2386A1CB1A3A58B70011785B /* ViewController.m in Sources */,
 				2386A1C31A3777440011785B /* INWitem.m in Sources */,
+				45C6D2FD1B0B6658004B3BCF /* Model.xcdatamodeld in Sources */,
+				45F110651ACADF490025B3EE /* QuickPreviewVC.m in Sources */,
 				45D75F1D1AB59A9F0071FA28 /* superCellClass.m in Sources */,
 				4506599D1AB89A7000940810 /* thumbStore.m in Sources */,
 				236BED121A61DE2D007020C7 /* neoCell.m in Sources */,
 				2386A1C01A3757D80011785B /* INWTableViewController.m in Sources */,
+				45C6D2F61B0A0888004B3BCF /* myTransformer.m in Sources */,
 				2386A1C61A383BF80011785B /* INWItemStore.m in Sources */,
 				2386A1D01A4080830011785B /* SecondVC.m in Sources */,
 				2372AC051A5DDB97002C06F7 /* StartViewController.m in Sources */,
@@ -412,7 +469,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -429,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -464,7 +520,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -560,6 +616,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		45C6D2FB1B0B6658004B3BCF /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				45C6D2FC1B0B6658004B3BCF /* Model.xcdatamodel */,
+			);
+			currentVersion = 45C6D2FC1B0B6658004B3BCF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2386A18D1A3724000011785B /* Project object */;
 }

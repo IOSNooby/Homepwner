@@ -26,16 +26,19 @@
     // now we back to main context
     
     CGSize   bigsize = bigImage.size;
-    CGRect   thumbRect = CGRectMake(0, 0, 108, 50);
+    CGRect   thumbRect = CGRectMake(0, 0, 50, 50);
     
     CGRect finalRect;
     
     CGFloat ratioW =  thumbRect.size.width / bigsize.width ;
     CGFloat ratioH =  thumbRect.size.height / bigsize.height;
-    float ratioClosestToBigsize = MAX(ratioW, ratioH);
     
-    finalRect = CGRectMake(0, 0, bigsize.height*ratioClosestToBigsize,
-                                 bigsize.width *ratioClosestToBigsize);
+    float ratioClosestToBigsize = MAX(ratioW, ratioH);  // Which is bigger value ? choose 1
+    
+    // Preserve Image ratio.  (Maybe Cropped , but better than Bended)
+    
+    finalRect = CGRectMake(0, 0, bigsize.width*ratioClosestToBigsize,
+                                 bigsize.height *ratioClosestToBigsize);
 
     
     UIGraphicsBeginImageContextWithOptions(finalRect.size,NO,0.0);

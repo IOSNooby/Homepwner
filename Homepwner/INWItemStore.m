@@ -36,9 +36,6 @@ static INWItemStore* store = nil;
     return store;
 }
 
-
-
-
 #pragma mark Class Initializers
 
 /// both init methods cant speak to the client.
@@ -56,14 +53,12 @@ static INWItemStore* store = nil;
     return self;
 }
 
-
 -(instancetype) init{
     @throw  [NSException exceptionWithName:@"Singleton"
                                     reason:@"You Noob !!,go USE +[INWItemstore sharedStore] method instead !!"
                                   userInfo:nil];
     return nil;
 }
-
 
 
 #pragma mark Lazy inits
@@ -142,6 +137,13 @@ static INWItemStore* store = nil;
         }
     }
     return NO;
+}
+
+-(void) deleteEntirePersistentAtDirectory:(NSURL*) motherURL{
+    /// where big url to delete
+    /// enumerate entire url
+    /// you got Dic contain sub URLS
+    /// goes remove every file in URL
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface INWTableViewController : UITableViewController
+@interface INWTableViewController : UITableViewController <UIPopoverControllerDelegate>
 
 
 @end

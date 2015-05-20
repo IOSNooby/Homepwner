@@ -30,7 +30,6 @@
     
     StartViewController* startVC = [[StartViewController alloc]init];
   
-
     UINavigationController* navController = [[UINavigationController alloc]initWithRootViewController:startVC];
     self.window.rootViewController =  navController;
     self.window.backgroundColor = [UIColor whiteColor];
@@ -50,8 +49,7 @@
     
       // Saving Only StoreData to persistent
       // Image Saving seperately (immediately saved)
-      BOOL saved =  [[INWItemStore sharedStore] savingStore];
-
+        BOOL saved =  [[INWItemStore sharedStore] savingStore];
     
 }
 
@@ -72,7 +70,8 @@
     NSLog(@"%@",NSStringFromSelector(_cmd));
     
     NSNotificationCenter* a = [NSNotificationCenter defaultCenter];
-    [a removeObserver:self name:nil object:nil];
+    [a removeObserver:self
+                 name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 
 }
 

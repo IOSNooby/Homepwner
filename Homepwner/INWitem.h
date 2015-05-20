@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface INWitem : NSObject <NSCoding>
 
@@ -20,7 +21,9 @@
 
 @property (nonatomic) BOOL hasImage;
 
-+(INWitem*) randomItem;
+@property (strong,nonatomic) UIImage* thumb;
+
+//+(INWitem*) randomItem;
 +(INWitem*) createBlankItem;
 
 

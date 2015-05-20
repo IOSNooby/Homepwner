@@ -19,7 +19,21 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *value;
 
+@property (weak, nonatomic) IBOutlet UIButton *LookImg;
 
+
+
+#pragma mark Communication with VC 
+
+// recieve value from VC
+
+@property(copy,nonatomic) void(^thumbImgblock)(void);
+
+@property(strong,nonatomic) NSNumber* ThumbSizeNumber;
+
+
+// use thumbGenerator.h instead
+/*
 -(void) setThumbnailFromImage:(UIImage*) imageOriginal;
-
+*/
 @end
